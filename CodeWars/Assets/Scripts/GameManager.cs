@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,5 +59,7 @@ public class GameManager : MonoBehaviour
             CurrentEnemyStats.IncreaseLevel();
             CurrentGameData.CurrentIncrease = 0;
         }
+
+        CurrentEnemyStats.RespawnEnemy(Enemies[Random.Range(0, Enemies.Length)]);
     }
 }

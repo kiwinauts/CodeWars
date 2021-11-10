@@ -419,12 +419,12 @@ MonoBehaviour:
     - Name: Basic Attack
       Description: The simplest attack
       Damage: 5
-      CriticalChance: 0.5
+      CriticalChance: 0.2
       TurnsToActivate: 0
     - Name: Heavy Attack
       Description: Something stronger
       Damage: 15
-      CriticalChance: 0.7
+      CriticalChance: 0.4
       TurnsToActivate: 1
     - Name: Ultimate Attack
       Description: 
@@ -434,11 +434,11 @@ MonoBehaviour:
     - Name: The Best Of All Attack
       Description: 
       Damage: 50
-      CriticalChance: 0.5
+      CriticalChance: 0.6
       TurnsToActivate: 5
     CurrentAttacks: []
     IncreaseLevelOfEnemyAfterRound: 3
-    CurrentIncrease: 3
+    CurrentIncrease: 0
     EnemyThinkingTime: 2
   CurrentPlayerStats:
     CriticalChanceMutliplier: 1

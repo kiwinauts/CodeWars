@@ -1,6 +1,6 @@
-using System;
+using UnityEngine;
 
-[Serializable]
+[System.Serializable]
 public class CharacterStats
 {
     public float CriticalChanceMutliplier = 1f;
@@ -20,18 +20,47 @@ public class CharacterStats
         CurrentHealth = MaxHealth;
     }
 
-    public int DamageCharacter(int damage)
+    public bool DamageCharacter(int damage)
     {
+        var evadeAttack = Random.Range(0, 1) > Evasion;
+
+        if (evadeAttack)
+        {
+            return false;
+        }
+
         CurrentHealth -= damage;
 
         if (CurrentHealth <= 0)
         {
             Death();
-            return 0;
+            return true;
         }
 
-        return CurrentHealth;
+        return true;
     }
+
+    public (bool, int) AttackDamage(int attackDamage, float attackCriticalChance)
+    {
+        var hit = Random.Range(0, 1) < Accuracy;
+
+        if (!hit)
+        {
+            return (hit, 0);
+        }
+
+        var damage = attackDamage + DamageBonus;
+
+        var critical = Random.Range(0, 1) < attackCriticalChance * CriticalChanceMutliplier;
+
+        if (critical)
+        {
+            damage *= 2;
+        }
+
+        return (hit, damage);
+    }
+
 
     public void Death()
     {
