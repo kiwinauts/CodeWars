@@ -6,6 +6,8 @@ public class Attack
 {
     public string Name;
 
+    public int Id;
+
     public string Description;
 
     public int Damage = 5;

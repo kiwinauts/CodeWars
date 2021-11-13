@@ -13,9 +13,11 @@ public class GameData
 
     public List<Attack> CurrentAttacks;
 
-    public int IncreaseLevelOfEnemyAfterRound = 3;
+    public int IncreaseLevelOfEnemyAfterRoundMin = 2;
 
-    public int CurrentIncrease = 0;
+    public int IncreaseLevelOfEnemyAfterRoundMax = 5;
+
+    public int CurrentEnemyLevelIncrease = 0;
 
     public float EnemyThinkingTime = 2f;
 
@@ -25,7 +27,7 @@ public class GameData
         {
             return;
         }
-
+        attackToAdd.Id = CurrentAttacks.Count;
         CurrentAttacks.Add(attackToAdd);
     }
 }

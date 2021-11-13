@@ -15,6 +15,8 @@ public class CharacterStats
 
     public int CurrentHealth = 100;
 
+    public Animator Animator;
+
     public CharacterStats()
     {
         CurrentHealth = MaxHealth;

@@ -5,10 +5,15 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance;
+
+    [Header("Basic Settings")]
     public GameData CurrentGameData;
 
+    [Header("Character")]
     public CharacterStats CurrentPlayerStats;
 
+    [Header("Enemies")]
     public Enemy CurrentEnemyStats;
 
     public GameObject[] Enemies;
@@ -16,25 +21,42 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (instance != null)
+        {
+            Destroy(this);
+        }
+
+        instance = this;
         CurrentGameData.CurrentAttacks.Clear();
         CurrentGameData.AddAttack(CurrentGameData.AvailableAttacks.FirstOrDefault(a => a.TurnsToActivate == 0));
+        CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
+    }
+
+    private int GetRandomLevelIncrease()
+    {
+        return Random.Range(CurrentGameData.IncreaseLevelOfEnemyAfterRoundMin, CurrentGameData.IncreaseLevelOfEnemyAfterRoundMax);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void IncreaseTurn()
+    public void PlayerAttack(int attackId)
+    {
+        IncreaseTurn();
+    }
+
+    private void IncreaseTurn()
     {
         Debug.Log("Turn Ended");
         switch (CurrentGameData.CurrentTurn)
         {
             case Turn.Player:
                 CurrentGameData.CurrentTurn = Turn.NPC;
-                Invoke("EnemiesTurn", CurrentGameData.EnemyThinkingTime);
-               break;
+                Invoke("EnemyTurn", CurrentGameData.EnemyThinkingTime);
+                break;
             case Turn.NPC:
                 CurrentGameData.CurrentTurn = Turn.Player;
                 break;
@@ -43,21 +65,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EnemiesTurn()
+    private void EnemyTurn()
     {
         Debug.Log("Enemy Turn");
         IncreaseTurn();
     }
 
-    public void IncreaseRound()
+    private void IncreaseRound()
     {
         CurrentGameData.Round++;
-        CurrentGameData.CurrentIncrease++;
+        CurrentGameData.CurrentEnemyLevelIncrease--;
 
-        if (CurrentGameData.CurrentIncrease >= CurrentGameData.IncreaseLevelOfEnemyAfterRound)
+        if (CurrentGameData.CurrentEnemyLevelIncrease <= 0)
         {
             CurrentEnemyStats.IncreaseLevel();
-            CurrentGameData.CurrentIncrease = 0;
+            CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         }
 
         CurrentEnemyStats.RespawnEnemy(Enemies[Random.Range(0, Enemies.Length)]);

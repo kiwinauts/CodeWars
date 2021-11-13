@@ -16,6 +16,7 @@ public class Enemy : CharacterStats
     public void RespawnEnemy(GameObject Enemy)
     {
         EnemyObj = Enemy;
+        Animator = Enemy.GetComponent<Animator>();
         CurrentHealth = MaxHealth;
     }
 }
