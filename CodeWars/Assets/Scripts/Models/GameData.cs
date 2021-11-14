@@ -1,18 +1,21 @@
 
 using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class GameData
 {
-    public int Round = 0;
+    public int Round = 1;
 
     public Turn CurrentTurn = Turn.Player;
-
+    
+    [Header("Character")]
     public List<Attack> AvailableAttacks;
 
     public List<Attack> CurrentAttacks;
 
+    [Header("Enemies")]
     public int IncreaseLevelOfEnemyAfterRoundMin = 2;
 
     public int IncreaseLevelOfEnemyAfterRoundMax = 5;
@@ -20,6 +23,13 @@ public class GameData
     public int CurrentEnemyLevelIncrease = 0;
 
     public float EnemyThinkingTime = 2f;
+
+    [Range(1,1)]
+    public int CurrentEnemyLevel = 1;
+
+    public Vector3 SpawnPosition;
+
+    public Quaternion SpawnRotation;
 
     public void AddAttack(Attack attackToAdd)
     {

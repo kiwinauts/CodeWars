@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[System.Serializable]
-public class CharacterStats
+public class CharacterStats : MonoBehaviour
 {
     public string Name;
 
@@ -9,7 +8,7 @@ public class CharacterStats
 
     public int DamageBonus = 0;
 
-    public float Evasion = 0.5f;
+    public float Evasion = 0.1f;
 
     public float Accuracy = 0.7f;
 
@@ -19,9 +18,12 @@ public class CharacterStats
 
     public Animator Animator;
 
-    public CharacterStats()
+    public bool IsPlayer = false;
+
+    public void Start()
     {
         CurrentHealth = MaxHealth;
+        Animator = GetComponent<Animator>();
     }
 
     public bool DamageCharacter(int damage)
@@ -82,9 +84,16 @@ public class CharacterStats
         Animator?.SetTrigger(DamageAnimationName);
     }
 
-    public void Death()
+    public void DeathAndIncreaseRound()
     {
         const string DeathAnimationName = "Death";
         Animator?.SetTrigger(DeathAnimationName);
+        Invoke("DestroyCharacter", 1f);
+    }
+
+    public void DestroyCharacter()
+    {
+        Destroy(gameObject);
+        GameManager.instance.IncreaseRound();
     }
 }

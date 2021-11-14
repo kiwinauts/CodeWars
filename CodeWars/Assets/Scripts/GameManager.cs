@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,13 +9,13 @@ public class GameManager : MonoBehaviour
     [Header("Basic Settings")]
     public GameData CurrentGameData;
 
-    [Header("Character")]
+    [Header("Objects")]
+
     public CharacterStats CurrentPlayerStats;
 
-    [Header("Enemies")]
     public Enemy CurrentEnemyStats;
 
-    public List<GameObject> Enemies;
+    public GameObject[] Enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -27,14 +26,28 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
-        
+
+        //First Round
+        CurrentGameData.Round = 1;
+
         //Create first attack
         CurrentGameData.CurrentAttacks.Clear();
         CurrentGameData.AddAttack(CurrentGameData.AvailableAttacks.FirstOrDefault(a => a.TurnsToActivate == 0));
-        
+
         //Initialize enemy
         CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
-        CurrentEnemyStats.RespawnEnemy(Enemies.FirstOrDefault());
+        RespawnEnemy();
+    }
+
+    private void RespawnEnemy()
+    {
+        var enemyToSpawn = Enemies[Random.Range(0, Enemies.Length)];
+        var instantiatedEnemy = Instantiate(enemyToSpawn, CurrentGameData.SpawnPosition, CurrentGameData.SpawnRotation);
+        CurrentEnemyStats = instantiatedEnemy.GetComponent<Enemy>();
+        if (CurrentEnemyStats != null)
+        {
+            CurrentEnemyStats.SetupLevel(CurrentGameData.CurrentEnemyLevel);
+        }
     }
 
     private int GetRandomLevelIncrease()
@@ -59,26 +72,44 @@ public class GameManager : MonoBehaviour
     {
         character.PlayAttackAnimation();
 
-        var (successAttack, attackDamage) = CurrentPlayerStats.AttackDamage(attack.Damage, attack.CriticalChance);
+        var (successAttack, attackDamage) = character.AttackDamage(attack.Damage, attack.CriticalChance);
 
+        var endRound = false;
         if (successAttack)
         {
-            PerformEnemyDamage(enemy, attackDamage);
+            endRound = PerformEnemyDamageAndCheckForEndRound(enemy, attackDamage);
         }
 
-        IncreaseTurn();
+        if (!endRound)
+        {
+            IncreaseTurn();
+        }
     }
 
-    private void PerformEnemyDamage(CharacterStats enemy, int attackDamage)
+    private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage)
     {
-        enemy.PlayDamageAnimation();
-        enemy.DamageCharacter(attackDamage);
+        character.PlayDamageAnimation();
+        character.DamageCharacter(attackDamage);
 
-        if (enemy.IsDead)
+        if (!character.IsDead)
         {
-            enemy.Death();
-            IncreaseRound();
+            return false;
         }
+
+        if (character.IsPlayer)
+        {
+            EndGame();
+            return true;
+        }
+
+        character.DeathAndIncreaseRound();
+        return true;
+    }
+
+    private void EndGame()
+    {
+        Debug.Log("End Game");
+        SceneManager.LoadScene(0);
     }
 
     private void IncreaseTurn()
@@ -102,17 +133,20 @@ public class GameManager : MonoBehaviour
         CharacterAttackAndIncreaseTurn(CurrentEnemyStats, CurrentPlayerStats, CurrentEnemyStats.Attack);
     }
 
-    private void IncreaseRound()
+    public void IncreaseRound()
     {
         CurrentGameData.Round++;
         CurrentGameData.CurrentEnemyLevelIncrease--;
 
         if (CurrentGameData.CurrentEnemyLevelIncrease <= 0)
         {
-            CurrentEnemyStats.IncreaseLevel();
+            CurrentGameData.CurrentEnemyLevel++;
             CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         }
 
-        CurrentEnemyStats.RespawnEnemy(Enemies[Random.Range(0, Enemies.Count)]);
+        RespawnEnemy();
+
+        //Choose Upgrade
+        CurrentGameData.CurrentTurn = Turn.Player;
     }
 }
