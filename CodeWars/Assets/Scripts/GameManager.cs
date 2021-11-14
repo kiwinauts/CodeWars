@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     [Header("Enemies")]
     public Enemy CurrentEnemyStats;
 
-    public GameObject[] Enemies;
+    public List<GameObject> Enemies;
 
     // Start is called before the first frame update
     void Start()
@@ -27,9 +27,14 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        
+        //Create first attack
         CurrentGameData.CurrentAttacks.Clear();
         CurrentGameData.AddAttack(CurrentGameData.AvailableAttacks.FirstOrDefault(a => a.TurnsToActivate == 0));
+        
+        //Initialize enemy
         CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
+        CurrentEnemyStats.RespawnEnemy(Enemies.FirstOrDefault());
     }
 
     private int GetRandomLevelIncrease()
@@ -37,20 +42,47 @@ public class GameManager : MonoBehaviour
         return Random.Range(CurrentGameData.IncreaseLevelOfEnemyAfterRoundMin, CurrentGameData.IncreaseLevelOfEnemyAfterRoundMax);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void PlayerAttack(int attackId)
     {
+        var attackSelected = CurrentGameData.CurrentAttacks.FirstOrDefault(a => a.Id == attackId);
+
+        if (attackSelected == null)
+        {
+            IncreaseTurn();
+            return;
+        }
+
+        CharacterAttackAndIncreaseTurn(CurrentPlayerStats, CurrentEnemyStats, attackSelected);
+    }
+
+    private void CharacterAttackAndIncreaseTurn(CharacterStats character, CharacterStats enemy, Attack attack)
+    {
+        character.PlayAttackAnimation();
+
+        var (successAttack, attackDamage) = CurrentPlayerStats.AttackDamage(attack.Damage, attack.CriticalChance);
+
+        if (successAttack)
+        {
+            PerformEnemyDamage(enemy, attackDamage);
+        }
+
         IncreaseTurn();
+    }
+
+    private void PerformEnemyDamage(CharacterStats enemy, int attackDamage)
+    {
+        enemy.PlayDamageAnimation();
+        enemy.DamageCharacter(attackDamage);
+
+        if (enemy.IsDead)
+        {
+            enemy.Death();
+            IncreaseRound();
+        }
     }
 
     private void IncreaseTurn()
     {
-        Debug.Log("Turn Ended");
         switch (CurrentGameData.CurrentTurn)
         {
             case Turn.Player:
@@ -67,8 +99,7 @@ public class GameManager : MonoBehaviour
 
     private void EnemyTurn()
     {
-        Debug.Log("Enemy Turn");
-        IncreaseTurn();
+        CharacterAttackAndIncreaseTurn(CurrentEnemyStats, CurrentPlayerStats, CurrentEnemyStats.Attack);
     }
 
     private void IncreaseRound()
@@ -82,6 +113,6 @@ public class GameManager : MonoBehaviour
             CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         }
 
-        CurrentEnemyStats.RespawnEnemy(Enemies[Random.Range(0, Enemies.Length)]);
+        CurrentEnemyStats.RespawnEnemy(Enemies[Random.Range(0, Enemies.Count)]);
     }
 }

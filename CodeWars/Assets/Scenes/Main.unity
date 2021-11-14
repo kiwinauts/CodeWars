@@ -481,25 +481,25 @@ MonoBehaviour:
     - Name: Basic Attack
       Id: 0
       Description: The simplest attack
-      Damage: 5
+      Damage: 10
       CriticalChance: 0.2
       TurnsToActivate: 0
     - Name: Heavy Attack
       Id: 0
       Description: Something stronger
-      Damage: 15
+      Damage: 20
       CriticalChance: 0.4
       TurnsToActivate: 1
     - Name: Ultimate Attack
       Id: 0
       Description: 
-      Damage: 30
+      Damage: 40
       CriticalChance: 0.5
       TurnsToActivate: 3
     - Name: The Best Of All Attack
       Id: 0
       Description: 
-      Damage: 50
+      Damage: 60
       CriticalChance: 0.6
       TurnsToActivate: 5
     CurrentAttacks: []
@@ -508,24 +508,34 @@ MonoBehaviour:
     CurrentEnemyLevelIncrease: 0
     EnemyThinkingTime: 2
   CurrentPlayerStats:
+    Name: Player
     CriticalChanceMutliplier: 1
     DamageBonus: 0
-    Evasion: 0.5
+    Evasion: 0.2
     Accuracy: 0.7
     MaxHealth: 100
     CurrentHealth: 100
     Animator: {fileID: 359370173}
   CurrentEnemyStats:
+    Name: Enemy
     CriticalChanceMutliplier: 1
     DamageBonus: 0
-    Evasion: 0.5
+    Evasion: 0.2
     Accuracy: 0.7
     MaxHealth: 100
     CurrentHealth: 100
     Animator: {fileID: 0}
     Level: 1
     EnemyObj: {fileID: 0}
-  Enemies: []
+    Attack:
+      Name: Enemy Attack
+      Id: 0
+      Description: 
+      Damage: 5
+      CriticalChance: 0.2
+      TurnsToActivate: 0
+  Enemies:
+  - {fileID: 2188495528723053062, guid: 281024d5bd4e14446b48fc8c494f511e, type: 3}
 --- !u!4 &1265528534
 Transform:
   m_ObjectHideFlags: 0

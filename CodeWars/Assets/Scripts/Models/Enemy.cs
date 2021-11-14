@@ -7,16 +7,23 @@ public class Enemy : CharacterStats
 
     public GameObject EnemyObj;
 
+    public Attack Attack;
+
     public void IncreaseLevel()
     {
         Debug.Log("Enemy increase level");
         Level++;
     }
 
-    public void RespawnEnemy(GameObject Enemy)
+    public void RespawnEnemy(GameObject enemy)
     {
-        EnemyObj = Enemy;
-        Animator = Enemy.GetComponent<Animator>();
+        if (enemy == null)
+        {
+            return;
+        }
+
+        EnemyObj = enemy;
+        Animator = enemy.GetComponent<Animator>();
         CurrentHealth = MaxHealth;
     }
 }

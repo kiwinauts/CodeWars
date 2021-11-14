@@ -3,6 +3,8 @@ using UnityEngine;
 [System.Serializable]
 public class CharacterStats
 {
+    public string Name;
+
     public float CriticalChanceMutliplier = 1f;
 
     public int DamageBonus = 0;
@@ -24,48 +26,65 @@ public class CharacterStats
 
     public bool DamageCharacter(int damage)
     {
-        var evadeAttack = Random.Range(0, 1) > Evasion;
-
+        var evadeAttack = Random.Range(0f, 1f) < Evasion;
+        
         if (evadeAttack)
         {
+            Debug.Log($"{Name} -> evade Attack: {evadeAttack}");
             return false;
         }
 
         CurrentHealth -= damage;
 
-        if (CurrentHealth <= 0)
-        {
-            Death();
-            return true;
-        }
-
         return true;
+    }
+
+    public bool IsDead
+    {
+        get
+        {
+            return CurrentHealth <= 0;
+        }
     }
 
     public (bool, int) AttackDamage(int attackDamage, float attackCriticalChance)
     {
-        var hit = Random.Range(0, 1) < Accuracy;
+        var hit = Random.Range(0f, 1f) < Accuracy;
 
         if (!hit)
         {
+            Debug.Log($"{Name} -> miss attack");
             return (hit, 0);
         }
 
         var damage = attackDamage + DamageBonus;
 
-        var critical = Random.Range(0, 1) < attackCriticalChance * CriticalChanceMutliplier;
+        var critical = Random.Range(0f, 1f) < attackCriticalChance * CriticalChanceMutliplier;
 
         if (critical)
         {
             damage *= 2;
         }
 
+        Debug.Log($"{Name} -> Damage Attack: {damage} (Critical: {critical})");
         return (hit, damage);
     }
 
+    public void PlayAttackAnimation()
+    {
+        const string AttackAnimationName = "Attack";
+        Animator?.SetTrigger(AttackAnimationName);
+    }
+
+    public void PlayDamageAnimation()
+    {
+        const string DamageAnimationName = "Damage";
+        Animator?.SetTrigger(DamageAnimationName);
+    }
 
     public void Death()
     {
-
+        const string DeathAnimationName = "Death";
+        Animator?.SetTrigger(DeathAnimationName);
     }
 }
