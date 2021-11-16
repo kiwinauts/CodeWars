@@ -20,6 +20,8 @@ public class CharacterStats : MonoBehaviour
 
     public bool IsPlayer = false;
 
+    private Attack currentAttack;
+
     public void Start()
     {
         CurrentHealth = MaxHealth;
@@ -72,10 +74,18 @@ public class CharacterStats : MonoBehaviour
         return (hit, damage);
     }
 
-    public void PlayAttackAnimation()
+    public void PlayAttackAnimation(Attack attack)
     {
         const string AttackAnimationName = "Attack";
         Animator?.SetTrigger(AttackAnimationName);
+        currentAttack = attack;
+        Invoke("CharacterAttackedAnimationEvent", 1f);
+    }
+
+    public void CharacterAttackedAnimationEvent()
+    {
+        Debug.Log("Attack animation finished");
+        GameManager.instance.CharacterAttacked(this, currentAttack);
     }
 
     public void PlayDamageAnimation()
@@ -88,10 +98,10 @@ public class CharacterStats : MonoBehaviour
     {
         const string DeathAnimationName = "Death";
         Animator?.SetTrigger(DeathAnimationName);
-        Invoke("DestroyCharacter", 1f);
+        Invoke("DestroyCharacterAnimationEvent", 1f);
     }
 
-    public void DestroyCharacter()
+    public void DestroyCharacterAnimationEvent()
     {
         Debug.Log("Death animation finished");
         Destroy(gameObject);

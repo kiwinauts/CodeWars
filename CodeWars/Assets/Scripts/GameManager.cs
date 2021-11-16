@@ -37,13 +37,14 @@ public class GameManager : MonoBehaviour
         CurrentGameData.CurrentAttacks.Clear();
         CurrentGameData.AddAttack(CurrentGameData.AvailableAttacks.FirstOrDefault(a => a.TurnsToActivate == 0));
         InitializeAttacks();
+        uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
 
         //Initialize enemy
         CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         RespawnEnemy();
 
         //Initialize Player health
-        uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth/ CurrentPlayerStats.MaxHealth, true);
+        uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth / CurrentPlayerStats.MaxHealth, true);
     }
 
     private void InitializeAttacks()
@@ -74,6 +75,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerAttack(int attackId)
     {
+        uiManager.DisableCurrentAttacks();
+
         var attackSelected = CurrentGameData.CurrentAttacks.FirstOrDefault(a => a.Id == attackId);
 
         if (attackSelected == null)
@@ -82,12 +85,12 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        CharacterAttackAndIncreaseTurn(CurrentPlayerStats, CurrentEnemyStats, attackSelected);
+        CurrentPlayerStats.PlayAttackAnimation(attackSelected);
     }
 
-    private void CharacterAttackAndIncreaseTurn(CharacterStats character, CharacterStats enemy, Attack attack)
+    public void CharacterAttacked(CharacterStats character, Attack attack)
     {
-        character.PlayAttackAnimation();
+        CharacterStats enemy = character.IsPlayer ? CurrentEnemyStats : CurrentPlayerStats;
 
         var (successAttack, attackDamage) = character.AttackDamage(attack.Damage, attack.CriticalChance);
 
@@ -136,7 +139,7 @@ public class GameManager : MonoBehaviour
         {
             case Turn.Player:
                 CurrentGameData.CurrentTurn = Turn.NPC;
-                Invoke("EnemyTurn", CurrentGameData.EnemyThinkingTime);
+                EnemyTurn();
                 break;
             case Turn.NPC:
                 ProgressAttacks();
@@ -153,11 +156,12 @@ public class GameManager : MonoBehaviour
         {
             attack.ProgressOneTurn();
         }
+        uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
     }
 
     private void EnemyTurn()
     {
-        CharacterAttackAndIncreaseTurn(CurrentEnemyStats, CurrentPlayerStats, CurrentEnemyStats.Attack);
+        CurrentEnemyStats.PlayAttackAnimation(CurrentEnemyStats.Attack);
     }
 
     public void IncreaseRound()
