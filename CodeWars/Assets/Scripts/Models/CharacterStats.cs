@@ -29,7 +29,7 @@ public class CharacterStats : MonoBehaviour
     public bool DamageCharacter(int damage)
     {
         var evadeAttack = Random.Range(0f, 1f) < Evasion;
-        
+
         if (evadeAttack)
         {
             Debug.Log($"{Name} -> evade Attack: {evadeAttack}");
@@ -93,6 +93,7 @@ public class CharacterStats : MonoBehaviour
 
     public void DestroyCharacter()
     {
+        Debug.Log("Death animation finished");
         Destroy(gameObject);
         GameManager.instance.IncreaseRound();
     }

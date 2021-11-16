@@ -9,13 +9,15 @@ public class GameManager : MonoBehaviour
     [Header("Basic Settings")]
     public GameData CurrentGameData;
 
-    [Header("Objects")]
+    [Header("Characters")]
 
     public CharacterStats CurrentPlayerStats;
 
     public Enemy CurrentEnemyStats;
 
     public GameObject[] Enemies;
+
+    private UIManager uiManager;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +28,7 @@ public class GameManager : MonoBehaviour
         }
 
         instance = this;
+        uiManager = GetComponent<UIManager>();
 
         //First Round
         CurrentGameData.Round = 1;
@@ -33,10 +36,22 @@ public class GameManager : MonoBehaviour
         //Create first attack
         CurrentGameData.CurrentAttacks.Clear();
         CurrentGameData.AddAttack(CurrentGameData.AvailableAttacks.FirstOrDefault(a => a.TurnsToActivate == 0));
+        InitializeAttacks();
 
         //Initialize enemy
         CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         RespawnEnemy();
+
+        //Initialize Player health
+        uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth/ CurrentPlayerStats.MaxHealth, true);
+    }
+
+    private void InitializeAttacks()
+    {
+        foreach (var attack in CurrentGameData.AvailableAttacks)
+        {
+            attack.Initialize();
+        }
     }
 
     private void RespawnEnemy()
@@ -47,6 +62,8 @@ public class GameManager : MonoBehaviour
         if (CurrentEnemyStats != null)
         {
             CurrentEnemyStats.SetupLevel(CurrentGameData.CurrentEnemyLevel);
+            uiManager.UpdateCharacterHealth(1.0f * CurrentEnemyStats.CurrentHealth / CurrentEnemyStats.MaxHealth, false);
+            uiManager.UpdateEnemyLevel(CurrentEnemyStats.Level);
         }
     }
 
@@ -90,6 +107,7 @@ public class GameManager : MonoBehaviour
     {
         character.PlayDamageAnimation();
         character.DamageCharacter(attackDamage);
+        uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer);
 
         if (!character.IsDead)
         {
@@ -121,10 +139,19 @@ public class GameManager : MonoBehaviour
                 Invoke("EnemyTurn", CurrentGameData.EnemyThinkingTime);
                 break;
             case Turn.NPC:
+                ProgressAttacks();
                 CurrentGameData.CurrentTurn = Turn.Player;
                 break;
             default:
                 break;
+        }
+    }
+
+    private void ProgressAttacks()
+    {
+        foreach (var attack in CurrentGameData.CurrentAttacks)
+        {
+            attack.ProgressOneTurn();
         }
     }
 

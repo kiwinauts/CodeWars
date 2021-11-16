@@ -24,18 +24,18 @@ public class Attack
         get { return RemainingTurns == 0; }
     }
 
-    public Attack()
+    public void Initialize()
     {
         RemainingTurns = TurnsToActivate;
     }
 
     public void ProgressOneTurn()
     {
-        TurnsToActivate--;
+        RemainingTurns--;
 
-        if (TurnsToActivate < 0)
+        if (RemainingTurns < 0)
         {
-            TurnsToActivate = 0;
+            RemainingTurns = 0;
         }
     }
 }

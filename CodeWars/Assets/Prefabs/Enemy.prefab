@@ -65,11 +65,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8fa4289d25d3d9478725efb4c79c0df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
+  Name: Enemy
   CriticalChanceMutliplier: 1
   DamageBonus: 0
   Evasion: 0.1
-  Accuracy: 0.7
+  Accuracy: 0.5
   MaxHealth: 100
   CurrentHealth: 100
   Animator: {fileID: 0}
@@ -82,6 +82,21 @@ MonoBehaviour:
     Damage: 5
     CriticalChance: 0
     TurnsToActivate: 0
+  CriticalChanceUpgradePerLevel:
+    Minimum: 0.1
+    Maximum: 0.2
+  EvasionUpgradePerLevel:
+    Minimum: 0.1
+    Maximum: 0.2
+  AccuracyUpgradePerLevel:
+    Minimum: 0.1
+    Maximum: 0.2
+  AttackDamageUpgradePerLevel:
+    Minimum: 5
+    Maximum: 10
+  HealthUpgradePerLevel:
+    Minimum: 10
+    Maximum: 30
 --- !u!1 &6172612475302076175
 GameObject:
   m_ObjectHideFlags: 0
