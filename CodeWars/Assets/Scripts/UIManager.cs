@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
 
     public List<GameObject> CurrentUIAttacks;
 
-    public void Start()
+    public void Awake()
     {
         ClearCurrentAttacks();
     }
