@@ -255,13 +255,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90708a6849af3a3438552170772882cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: 
-  CriticalChanceMutliplier: 1
+  Name: Player
+  CriticalChance: 0.1
   DamageBonus: 0
   Evasion: 0.5
   Accuracy: 0.7
   MaxHealth: 100
   CurrentHealth: 100
   Animator: {fileID: 0}
-  CharacterObj: {fileID: 0}
   IsPlayer: 1
+  MaxEvasion: 0.6
+  MaxCritical: 0.6

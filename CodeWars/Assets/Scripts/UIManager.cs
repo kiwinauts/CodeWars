@@ -187,6 +187,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowUpdates(IEnumerable<UpdateVm> updates)
     {
+        ClearCurrentAttacks();
         var updateIndex = 0;
         foreach (var updateVm in updates)
         {

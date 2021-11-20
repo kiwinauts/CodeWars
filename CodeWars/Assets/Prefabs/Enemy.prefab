@@ -66,7 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Enemy
-  CriticalChanceMutliplier: 1
+  CriticalChance: 0.1
   DamageBonus: 0
   Evasion: 0.1
   Accuracy: 0.5
@@ -74,6 +74,8 @@ MonoBehaviour:
   CurrentHealth: 100
   Animator: {fileID: 0}
   IsPlayer: 0
+  MaxEvasion: 0.6
+  MaxCritical: 0.6
   Level: 1
   Attack:
     Name: 
@@ -86,7 +88,7 @@ MonoBehaviour:
   CriticalChanceUpgradePerLevel:
     Minimum: 0.1
     Maximum: 0.2
-    Cap: 2
+    Cap: 0.5
   EvasionUpgradePerLevel:
     Minimum: 0.05
     Maximum: 0.1

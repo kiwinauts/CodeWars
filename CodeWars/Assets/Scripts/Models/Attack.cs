@@ -8,8 +8,6 @@ public class Attack
 
     public int Id;
 
-    public string Description;
-
     public int Damage = 5;
 
     [Range(0, 1)]

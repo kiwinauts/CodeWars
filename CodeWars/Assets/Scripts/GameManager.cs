@@ -295,7 +295,13 @@ public class GameManager : MonoBehaviour
                 CurrentPlayerStats.CurrentHealth = Mathf.Min(CurrentPlayerStats.MaxHealth, CurrentPlayerStats.CurrentHealth + healthUpdate);
                 break;
             case UpdateType.BonusCriticalChance:
-                CurrentPlayerStats.CriticalChanceMutliplier += update.UpdateValue;
+                CurrentPlayerStats.CriticalChance = Mathf.Min(CurrentPlayerStats.MaxCritical, CurrentPlayerStats.CriticalChance + update.UpdateValue);
+                
+                if (CurrentPlayerStats.CriticalChance == CurrentPlayerStats.MaxCritical)
+                {
+                    removeUpdate = true;
+                }
+
                 break;
             case UpdateType.BonusAccuracy:
                 CurrentPlayerStats.Accuracy = Mathf.Min(1f, CurrentPlayerStats.Accuracy + update.UpdateValue);

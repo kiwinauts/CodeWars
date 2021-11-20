@@ -22,14 +22,14 @@ public class Enemy : CharacterStats
 
         for (int i = 1; i < level; i++)
         {
-            CriticalChanceMutliplier += Random.Range(CriticalChanceUpgradePerLevel.Minimum, CriticalChanceUpgradePerLevel.Maximum);
+            CriticalChance += Random.Range(CriticalChanceUpgradePerLevel.Minimum, CriticalChanceUpgradePerLevel.Maximum);
             Evasion += Random.Range(EvasionUpgradePerLevel.Minimum, EvasionUpgradePerLevel.Maximum);
             Accuracy += Random.Range(AccuracyUpgradePerLevel.Minimum, AccuracyUpgradePerLevel.Maximum);
             DamageBonus += Random.Range(AttackDamageUpgradePerLevel.Minimum, AttackDamageUpgradePerLevel.Maximum);
             MaxHealth += Random.Range(HealthUpgradePerLevel.Minimum, HealthUpgradePerLevel.Maximum);
         }
 
-        CriticalChanceMutliplier = Mathf.Min(CriticalChanceMutliplier, CriticalChanceUpgradePerLevel.Cap);
+        CriticalChance = Mathf.Min(CriticalChance, CriticalChanceUpgradePerLevel.Cap);
         Evasion = Mathf.Min(Evasion, EvasionUpgradePerLevel.Cap);
         Accuracy = Mathf.Min(Accuracy, AccuracyUpgradePerLevel.Cap);
 

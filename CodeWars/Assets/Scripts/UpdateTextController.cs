@@ -16,13 +16,26 @@ public class UpdateTextController : MonoBehaviour
 
     public Text Damage;
 
-    public void UpdateText(UpdateVm vm)
+    public GameObject[] NewAttackIcons;
+
+    public Image UpdateValueIcon;
+
+    private void Reset()
     {
-        Name.text = vm.Name;
         UpdateValue.text = "";
         CriticalChance.text = "";
         RoundsToUnlock.text = "";
         Damage.text = "";
+        UpdateValueIcon.gameObject.SetActive(false);
+        ActiveIcons(false);
+    }
+
+    public void UpdateText(UpdateVm vm)
+    {
+        Reset();
+
+        Name.text = vm.Name;
+        UpdateValueIcon.sprite = vm.Image;
 
         switch (vm.updateType)
         {
@@ -32,19 +45,30 @@ public class UpdateTextController : MonoBehaviour
                     CriticalChance.text = $"{vm.Attack?.CriticalChance * 100 ?? 0:F0}%";
                     RoundsToUnlock.text = $"{vm.Attack?.TurnsToActivate ?? 0}";
                     Damage.text = $"{vm.Attack?.Damage ?? 0}";
+                    ActiveIcons(true);
                     break;
                 }
             case UpdateType.BonusCriticalChance:
             case UpdateType.BonusEvasion:
             case UpdateType.BonusAccuracy:
+                UpdateValueIcon.gameObject.SetActive(true);
                 UpdateValue.text = $"+{vm.UpdateValue * 100:F0}%";
                 break;
             case UpdateType.BonusHealth:
             case UpdateType.BonusAttackDamage:
+                UpdateValueIcon.gameObject.SetActive(true);
                 UpdateValue.text = $"+{Convert.ToInt32(vm.UpdateValue)}";
                 break;
             default:
                 break;
+        }
+    }
+
+    private void ActiveIcons(bool active)
+    {
+        foreach (var icon in NewAttackIcons)
+        {
+            icon.SetActive(active);
         }
     }
 }

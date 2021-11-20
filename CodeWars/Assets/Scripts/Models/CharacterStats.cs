@@ -4,7 +4,7 @@ public class CharacterStats : MonoBehaviour
 {
     public string Name;
 
-    public float CriticalChanceMutliplier = 1f;
+    public float CriticalChance = 0.1f;
 
     public int DamageBonus = 0;
 
@@ -21,7 +21,9 @@ public class CharacterStats : MonoBehaviour
     public bool IsPlayer = false;
 
     public float MaxEvasion = 0.6f;
-    
+
+    public float MaxCritical = 0.6f;
+
     private Attack currentAttack;
 
     public void Start()
@@ -63,7 +65,7 @@ public class CharacterStats : MonoBehaviour
 
         var damage = attackDamage + DamageBonus;
 
-        var critical = Random.Range(0f, 1f) < attackCriticalChance * CriticalChanceMutliplier;
+        var critical = Random.Range(0f, 1f) < (attackCriticalChance + CriticalChance);
 
         if (critical)
         {
@@ -112,7 +114,7 @@ public class CharacterStats : MonoBehaviour
         return new StatsUI
         {
             Accuracy = Accuracy,
-            CriticalChance = CriticalChanceMutliplier,
+            CriticalChance = CriticalChance,
             Damage = DamageBonus,
             Evasion = Evasion
         };

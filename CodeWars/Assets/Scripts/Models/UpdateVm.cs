@@ -15,6 +15,8 @@ public class UpdateVm
 
     private float? updateValue;
 
+    public Sprite Image;
+
     public float UpdateValue
     {
         get

@@ -15,6 +15,6 @@ public class CharacterStatsTextController : MonoBehaviour
         Evasion.text = $"{stats.Evasion*100:F0}%";
         Accuracy.text = $"{stats.Accuracy*100:F0}%";
         Damage.text = stats.Damage.ToString();
-        CriticalChance.text = $"{(stats.CriticalChance - 1f)*100:F0}%";
+        CriticalChance.text = $"{stats.CriticalChance*100:F0}%";
     }
 }
