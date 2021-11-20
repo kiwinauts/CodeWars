@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +8,33 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager Instance;
 
+    [Header("Health")]
     public Slider PlayerHealth;
 
     public Slider EnemyHealth;
 
-    public Text EnemyLevel;
+    [Header("Updates")]
+    public Button[] UpdateUI;
 
+    [Header("Attacks")]
     public GameObject AttackCanvasParent;
 
     public GameObject AttackButton;
 
     public List<Button> CurrentUIAttacks;
 
-    public Button[] UpdateUI;
+    public Text AttackMessage;
+
+    public float AttackMessageSeconds;
+
+    public string[] MissMessages;
+
+    public string[] CriticalMessages;
+
+    public string[] EvadeMessages;
+
+    [Header("Stats")]
+    public Text EnemyLevel;
 
     public CharacterStatsTextController PlayerStats;
     
@@ -41,6 +54,32 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
+    }
+    
+    public void MissMessage()
+    {
+        ShowAttackMessage(MissMessages[Random.Range(0, MissMessages.Length)]);
+    }
+
+    public void CriticalHitMessage()
+    {
+        ShowAttackMessage(CriticalMessages[Random.Range(0, CriticalMessages.Length)]);
+    }
+
+    public void EvadeMessage()
+    {
+        ShowAttackMessage(EvadeMessages[Random.Range(0, CriticalMessages.Length)]);
+    }
+
+    private void ShowAttackMessage(string message)
+    {
+        AttackMessage.text = message;
+        Invoke("HideAttackMessage", AttackMessageSeconds);
+    }
+
+    private void HideAttackMessage()
+    {
+        AttackMessage.text = "";
     }
 
     public void UpdateRound(int round)
@@ -117,7 +156,7 @@ public class UIManager : MonoBehaviour
         }
 
         var initialX = (-1) * 62.5f * 2 * (currentAttacksCount - 1);
-        return Convert.ToSingle(initialX + currentAttackIndex * 250f);
+        return System.Convert.ToSingle(initialX + currentAttackIndex * 250f);
     }
 
     private Button AddAttackListener(GameObject instantiated, Attack attack)

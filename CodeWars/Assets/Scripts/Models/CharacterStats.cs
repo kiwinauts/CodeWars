@@ -36,7 +36,6 @@ public class CharacterStats : MonoBehaviour
 
         if (evadeAttack)
         {
-            Debug.Log($"{Name} -> evade Attack: {evadeAttack}");
             return false;
         }
 
@@ -53,14 +52,13 @@ public class CharacterStats : MonoBehaviour
         }
     }
 
-    public (bool, int) AttackDamage(int attackDamage, float attackCriticalChance)
+    public (bool, int, bool) AttackDamage(int attackDamage, float attackCriticalChance)
     {
         var hit = Random.Range(0f, 1f) < Accuracy;
 
         if (!hit)
         {
-            Debug.Log($"{Name} -> miss attack");
-            return (hit, 0);
+            return (hit, 0, false);
         }
 
         var damage = attackDamage + DamageBonus;
@@ -72,8 +70,7 @@ public class CharacterStats : MonoBehaviour
             damage *= 2;
         }
 
-        Debug.Log($"{Name} -> Damage Attack: {damage} (Critical: {critical})");
-        return (hit, damage);
+        return (hit, damage, critical);
     }
 
     public void PlayAttackAnimation(Attack attack)

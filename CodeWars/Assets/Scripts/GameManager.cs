@@ -136,12 +136,16 @@ public class GameManager : MonoBehaviour
     {
         CharacterStats enemy = character.IsPlayer ? CurrentEnemyStats : CurrentPlayerStats;
 
-        var (successAttack, attackDamage) = character.AttackDamage(attack.Damage, attack.CriticalChance);
+        var (successAttack, attackDamage, critical) = character.AttackDamage(attack.Damage, attack.CriticalChance);
 
         var endRound = false;
         if (successAttack)
         {
-            endRound = PerformEnemyDamageAndCheckForEndRound(enemy, attackDamage);
+            endRound = PerformEnemyDamageAndCheckForEndRound(enemy, attackDamage, critical);
+        }
+        else
+        {
+            uiManager.MissMessage();
         }
 
         if (!endRound)
@@ -150,11 +154,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage)
+    private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage, bool critical)
     {
         character.PlayDamageAnimation();
-        character.DamageCharacter(attackDamage);
+        var hitTarget = character.DamageCharacter(attackDamage);
         uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer);
+
+        if (!hitTarget)
+        {
+            uiManager.EvadeMessage();
+        }
+        else if (critical)
+        {
+            uiManager.CriticalHitMessage();
+        }
 
         if (!character.IsDead)
         {
