@@ -82,21 +82,27 @@ MonoBehaviour:
     Damage: 5
     CriticalChance: 0
     TurnsToActivate: 0
+    RemainingTurns: 0
   CriticalChanceUpgradePerLevel:
     Minimum: 0.1
     Maximum: 0.2
+    Cap: 2
   EvasionUpgradePerLevel:
-    Minimum: 0.1
-    Maximum: 0.2
+    Minimum: 0.05
+    Maximum: 0.1
+    Cap: 0.5
   AccuracyUpgradePerLevel:
     Minimum: 0.1
     Maximum: 0.2
+    Cap: 0.9
   AttackDamageUpgradePerLevel:
     Minimum: 5
     Maximum: 10
+    Cap: 0
   HealthUpgradePerLevel:
     Minimum: 10
     Maximum: 30
+    Cap: 0
 --- !u!1 &6172612475302076175
 GameObject:
   m_ObjectHideFlags: 0

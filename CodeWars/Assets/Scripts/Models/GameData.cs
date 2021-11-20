@@ -35,7 +35,6 @@ public class GameData
         {
             return;
         }
-        attackToAdd.Id = CurrentAttacks.Count;
         CurrentAttacks.Add(attackToAdd);
     }
 }

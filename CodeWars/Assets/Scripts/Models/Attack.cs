@@ -16,8 +16,8 @@ public class Attack
     public float CriticalChance = 0;
 
     public int TurnsToActivate = 0;
-
-    private int RemainingTurns = 0;
+    
+    public int RemainingTurns = 0;
 
     public bool isActive
     {

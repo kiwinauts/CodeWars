@@ -20,6 +20,8 @@ public class CharacterStats : MonoBehaviour
 
     public bool IsPlayer = false;
 
+    public float MaxEvasion = 0.6f;
+    
     private Attack currentAttack;
 
     public void Start()
@@ -85,7 +87,7 @@ public class CharacterStats : MonoBehaviour
     public void CharacterAttackedAnimationEvent()
     {
         Debug.Log("Attack animation finished");
-        GameManager.instance.CharacterAttacked(this, currentAttack);
+        GameManager.Instance.CharacterAttacked(this, currentAttack);
     }
 
     public void PlayDamageAnimation()
@@ -105,6 +107,6 @@ public class CharacterStats : MonoBehaviour
     {
         Debug.Log("Death animation finished");
         Destroy(gameObject);
-        GameManager.instance.IncreaseRound();
+        GameManager.Instance.IncreaseRound();
     }
 }

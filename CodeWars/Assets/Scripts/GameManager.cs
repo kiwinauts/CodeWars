@@ -1,10 +1,11 @@
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager instance;
+    public static GameManager Instance;
 
     [Header("Basic Settings")]
     public GameData CurrentGameData;
@@ -15,6 +16,8 @@ public class GameManager : MonoBehaviour
 
     public Enemy CurrentEnemyStats;
 
+    public UpdateVm[] Updates;
+
     public GameObject[] Enemies;
 
     private UIManager uiManager;
@@ -22,12 +25,12 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(this);
         }
 
-        instance = this;
+        Instance = this;
         uiManager = GetComponent<UIManager>();
 
         //First Round
@@ -45,13 +48,32 @@ public class GameManager : MonoBehaviour
 
         //Initialize Player health
         uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth / CurrentPlayerStats.MaxHealth, true);
+
+        //Updates
+        AddInUpdatesTheNewAttacks();
+    }
+
+    private void AddInUpdatesTheNewAttacks()
+    {
+        var attacksToUnlock = CurrentGameData.AvailableAttacks.Where(a => !CurrentGameData.CurrentAttacks.Contains(a));
+        foreach (var attack in attacksToUnlock)
+        {
+            Updates = Updates.Append(new UpdateVm
+            {
+                updateType = UpdateType.NewAttackMove,
+                Attack = attack
+            }).ToArray();
+        }
     }
 
     private void InitializeAttacks()
     {
+        int id = 0;
         foreach (var attack in CurrentGameData.AvailableAttacks)
         {
+            attack.Id = id;
             attack.Initialize();
+            id++;
         }
     }
 
@@ -73,11 +95,9 @@ public class GameManager : MonoBehaviour
         return Random.Range(CurrentGameData.IncreaseLevelOfEnemyAfterRoundMin, CurrentGameData.IncreaseLevelOfEnemyAfterRoundMax);
     }
 
-    public void PlayerAttack(int attackId)
+    public void PlayerAttack(Attack attackSelected)
     {
         uiManager.DisableCurrentAttacks();
-
-        var attackSelected = CurrentGameData.CurrentAttacks.FirstOrDefault(a => a.Id == attackId);
 
         if (attackSelected == null)
         {
@@ -86,6 +106,11 @@ public class GameManager : MonoBehaviour
         }
 
         CurrentPlayerStats.PlayAttackAnimation(attackSelected);
+
+        if (attackSelected.TurnsToActivate != 0)
+        {
+            attackSelected.Initialize();
+        }
     }
 
     public void CharacterAttacked(CharacterStats character, Attack attack)
@@ -177,7 +202,83 @@ public class GameManager : MonoBehaviour
 
         RespawnEnemy();
 
-        //Choose Upgrade
+        ChooseUpgradeAndSendToUIManager();
         CurrentGameData.CurrentTurn = Turn.Player;
+        InitializeAttacks();
+    }
+
+    public void ChooseUpgradeAndSendToUIManager()
+    {
+        Updates = Updates.OrderBy(x => Random.Range(0, 1) >= 0.5f).ToArray();
+
+        var updatesToChoose = 3;
+        if (Updates.Count() < 3)
+        {
+            updatesToChoose = Updates.Count();
+        }
+        else if (Updates.Count() == 0)
+        {
+            uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
+            return;
+        }
+
+        var randomUpdates = new List<UpdateVm>();
+        var currentUIPosition = 0;
+
+        while (randomUpdates.Count < updatesToChoose)
+        {
+            var chooseElement = Random.Range(0f, 1f);
+
+            var shouldChooseElement = (updatesToChoose * 1f - randomUpdates.Count) / (Updates.Length - currentUIPosition);
+
+            if (chooseElement <= shouldChooseElement)
+            {
+                randomUpdates.Add(Updates[currentUIPosition]);
+            }
+
+            currentUIPosition++;
+        }
+
+        uiManager.ShowUpdates(randomUpdates);
+    }
+
+    public void ChosenUpdate(UpdateVm update)
+    {
+        uiManager.HideAllUpdates();
+
+        var removeUpdate = false;
+        switch (update.updateType)
+        {
+            case UpdateType.NewAttackMove:
+                CurrentGameData.AddAttack(update.Attack);
+                removeUpdate = true;
+                break;
+            case UpdateType.BonusAttackDamage:
+                CurrentPlayerStats.DamageBonus += System.Convert.ToInt32(update.UpdateValue);
+                break;
+            case UpdateType.BonusHealth:
+                var healthUpdate = System.Convert.ToInt32(update.UpdateValue);
+                CurrentPlayerStats.MaxHealth += healthUpdate;
+                CurrentPlayerStats.CurrentHealth = Mathf.Min(CurrentPlayerStats.MaxHealth, CurrentPlayerStats.CurrentHealth + healthUpdate);
+                break;
+            case UpdateType.BonusCriticalChance:
+                CurrentPlayerStats.CriticalChanceMutliplier += update.UpdateValue;
+                break;
+            case UpdateType.BonusAccuracy:
+                CurrentPlayerStats.Accuracy = Mathf.Min(1f, CurrentPlayerStats.Accuracy + update.UpdateValue);
+                break;
+            case UpdateType.BonusEvasion:
+                CurrentPlayerStats.Evasion = Mathf.Min(CurrentPlayerStats.MaxEvasion, CurrentPlayerStats.Evasion + update.UpdateValue);
+                break;
+            default:
+                break;
+        }
+
+        if (removeUpdate)
+        {
+            Updates = Updates.Where(u => !u.Equals(update)).ToArray();
+        }
+
+        uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
     }
 }

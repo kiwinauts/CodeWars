@@ -29,6 +29,10 @@ public class Enemy : CharacterStats
             MaxHealth += Random.Range(HealthUpgradePerLevel.Minimum, HealthUpgradePerLevel.Maximum);
         }
 
+        CriticalChanceMutliplier = Mathf.Min(CriticalChanceMutliplier, CriticalChanceUpgradePerLevel.Cap);
+        Evasion = Mathf.Min(Evasion, EvasionUpgradePerLevel.Cap);
+        Accuracy = Mathf.Min(Accuracy, AccuracyUpgradePerLevel.Cap);
+
         CurrentHealth = MaxHealth;
     }
 }
