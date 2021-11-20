@@ -148,10 +148,10 @@ public class UIManager : MonoBehaviour
 
             currentUIButton.onClick.RemoveAllListeners();
             currentUIButton.onClick.AddListener(() => GameManager.Instance.ChosenUpdate(updateVm));
-            var text = currentUIButton.GetComponentInChildren<Text>();
+            var text = currentUIButton.GetComponent<UpdateTextController>();
             if (text != null)
             {
-                text.text = updateVm.updateType.ToString();
+                text.UpdateText(updateVm);
             }
 
             currentUIButton.gameObject.SetActive(true);

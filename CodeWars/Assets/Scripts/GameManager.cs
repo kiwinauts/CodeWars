@@ -274,9 +274,17 @@ public class GameManager : MonoBehaviour
                 break;
             case UpdateType.BonusAccuracy:
                 CurrentPlayerStats.Accuracy = Mathf.Min(1f, CurrentPlayerStats.Accuracy + update.UpdateValue);
+                if (CurrentPlayerStats.Accuracy == 1f)
+                {
+                    removeUpdate = true;
+                }
                 break;
             case UpdateType.BonusEvasion:
                 CurrentPlayerStats.Evasion = Mathf.Min(CurrentPlayerStats.MaxEvasion, CurrentPlayerStats.Evasion + update.UpdateValue);
+                if (CurrentPlayerStats.Evasion == CurrentPlayerStats.MaxEvasion)
+                {
+                    removeUpdate = true;
+                }
                 break;
             default:
                 break;

@@ -5,6 +5,8 @@ public class UpdateVm
 {
     public UpdateType updateType;
 
+    public string Name;
+
     public float MinimumUpdate;
 
     public float MaximumUpdate;
