@@ -37,11 +37,11 @@ public class UpdateTextController : MonoBehaviour
             case UpdateType.BonusCriticalChance:
             case UpdateType.BonusEvasion:
             case UpdateType.BonusAccuracy:
-                UpdateValue.text = $"{vm.UpdateValue * 100:F0}%";
+                UpdateValue.text = $"+{vm.UpdateValue * 100:F0}%";
                 break;
             case UpdateType.BonusHealth:
             case UpdateType.BonusAttackDamage:
-                UpdateValue.text = Convert.ToInt32(vm.UpdateValue).ToString();
+                UpdateValue.text = $"+{Convert.ToInt32(vm.UpdateValue)}";
                 break;
             default:
                 break;
