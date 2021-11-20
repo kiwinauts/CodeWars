@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
         //First Round
         CurrentGameData.Round = 1;
+        uiManager.UpdateRound(CurrentGameData.Round);
 
         //Create first attack
         CurrentGameData.CurrentAttacks.Clear();
@@ -51,6 +52,10 @@ public class GameManager : MonoBehaviour
 
         //Updates
         AddInUpdatesTheNewAttacks();
+
+        //Stats
+        uiManager.ChangeCharacterStats(CurrentPlayerStats.MapToStats(), true);
+        uiManager.ChangeCharacterStats(CurrentEnemyStats.MapToStats(), false);
     }
 
     private void AddInUpdatesTheNewAttacks()
@@ -88,6 +93,7 @@ public class GameManager : MonoBehaviour
             uiManager.UpdateCharacterHealth(1.0f * CurrentEnemyStats.CurrentHealth / CurrentEnemyStats.MaxHealth, false);
             uiManager.UpdateEnemyLevel(CurrentEnemyStats.Level);
         }
+        uiManager.ChangeCharacterStats(CurrentEnemyStats.MapToStats(), false);
     }
 
     private int GetRandomLevelIncrease()
@@ -142,12 +148,6 @@ public class GameManager : MonoBehaviour
             return false;
         }
 
-        if (character.IsPlayer)
-        {
-            EndGame();
-            return true;
-        }
-
         character.DeathAndIncreaseRound();
         return true;
     }
@@ -189,11 +189,18 @@ public class GameManager : MonoBehaviour
         CurrentEnemyStats.PlayAttackAnimation(CurrentEnemyStats.Attack);
     }
 
-    public void IncreaseRound()
+    public void IncreaseRound(bool endGame)
     {
-        CurrentGameData.Round++;
-        CurrentGameData.CurrentEnemyLevelIncrease--;
+        if (endGame)
+        {
+            EndGame();
+            return;
+        }
 
+        CurrentGameData.Round++;
+        uiManager.UpdateRound(CurrentGameData.Round);
+
+        CurrentGameData.CurrentEnemyLevelIncrease--;
         if (CurrentGameData.CurrentEnemyLevelIncrease <= 0)
         {
             CurrentGameData.CurrentEnemyLevel++;
@@ -279,6 +286,7 @@ public class GameManager : MonoBehaviour
             Updates = Updates.Where(u => !u.Equals(update)).ToArray();
         }
 
+        uiManager.ChangeCharacterStats(CurrentPlayerStats.MapToStats(), true);
         uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
     }
 }

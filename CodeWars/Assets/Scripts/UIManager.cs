@@ -23,6 +23,12 @@ public class UIManager : MonoBehaviour
 
     public Button[] UpdateUI;
 
+    public CharacterStatsTextController PlayerStats;
+    
+    public CharacterStatsTextController EnemyStats;
+
+    public Text RoundNumber;
+
     public void Awake()
     {
         ClearCurrentAttacks();
@@ -35,6 +41,11 @@ public class UIManager : MonoBehaviour
             Destroy(this);
         }
         Instance = this;
+    }
+
+    public void UpdateRound(int round)
+    {
+        RoundNumber.text = $"Round {round}";
     }
 
     public void ClearCurrentAttacks()
@@ -146,5 +157,16 @@ public class UIManager : MonoBehaviour
         {
             currentUIButton.gameObject.SetActive(false);
         }
+    }
+
+    public void ChangeCharacterStats(StatsUI stats, bool isPlayer)
+    {
+        if (isPlayer)
+        {
+            PlayerStats.UpdateStats(stats);
+            return;
+        }
+
+        EnemyStats.UpdateStats(stats);
     }
 }

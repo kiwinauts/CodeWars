@@ -107,6 +107,17 @@ public class CharacterStats : MonoBehaviour
     {
         Debug.Log("Death animation finished");
         Destroy(gameObject);
-        GameManager.Instance.IncreaseRound();
+        GameManager.Instance.IncreaseRound(IsPlayer);
+    }
+
+    public StatsUI MapToStats()
+    {
+        return new StatsUI
+        {
+            Accuracy = Accuracy,
+            CriticalChance = CriticalChanceMutliplier,
+            Damage = DamageBonus,
+            Evasion = Evasion
+        };
     }
 }
