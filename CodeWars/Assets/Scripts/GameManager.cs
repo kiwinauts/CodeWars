@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     private void InitializeAttacks()
     {
         int id = 0;
+        CurrentGameData.AvailableAttacks = CurrentGameData.AvailableAttacks.OrderBy(a => a.Damage).ToList();
         foreach (var attack in CurrentGameData.AvailableAttacks)
         {
             attack.Id = id;

@@ -96,6 +96,14 @@ public class UIManager : MonoBehaviour
             rectTransform.anchoredPosition = new Vector2(CalculateXLocation(currentAttacks.Count(), currentAttackIndex), 100);
 
             var button = AddAttackListener(instantiated, currentAttack);
+
+            var textController = button.GetComponent<AttackTextController>();
+
+            if (textController != null)
+            {
+                textController.UpdateAttack(currentAttack.MapToAttackUI());
+            }
+
             CurrentUIAttacks.Add(button);
             currentAttackIndex++;
         }
