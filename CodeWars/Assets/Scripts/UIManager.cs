@@ -29,12 +29,12 @@ public class UIManager : MonoBehaviour
 
     public Text RoundNumber;
 
-    public void Awake()
+    private void Awake()
     {
         ClearCurrentAttacks();
     }
 
-    public void Start()
+    private void Start()
     {
         if (Instance != null)
         {

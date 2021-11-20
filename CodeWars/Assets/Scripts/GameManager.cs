@@ -22,8 +22,10 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
 
+    private bool clickedEscape;
+
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         if (Instance != null)
         {
@@ -56,6 +58,16 @@ public class GameManager : MonoBehaviour
         //Stats
         uiManager.ChangeCharacterStats(CurrentPlayerStats.MapToStats(), true);
         uiManager.ChangeCharacterStats(CurrentEnemyStats.MapToStats(), false);
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape) && !clickedEscape)
+        {
+            clickedEscape = true;
+            CurrentPlayerStats.DeathAndIncreaseRound();
+            return;
+        }
     }
 
     private void AddInUpdatesTheNewAttacks()
