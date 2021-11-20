@@ -49,4 +49,9 @@ public class Attack
             RemainingTurns = RemainingTurns
         };
     }
+
+    public void Reset()
+    {
+        RemainingTurns = TurnsToActivate + 1;
+    }
 }

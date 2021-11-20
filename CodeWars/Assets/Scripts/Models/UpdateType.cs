@@ -5,5 +5,6 @@ public enum UpdateType
     BonusCriticalChance,
     BonusEvasion,
     BonusHealth,
-    BonusAccuracy
+    BonusAccuracy,
+    FullHealth
 }

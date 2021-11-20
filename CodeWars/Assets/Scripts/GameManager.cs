@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
         RespawnEnemy();
 
         //Initialize Player health
-        uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth / CurrentPlayerStats.MaxHealth, true);
+        uiManager.UpdateCharacterHealth(1.0f * CurrentPlayerStats.CurrentHealth / CurrentPlayerStats.MaxHealth, true, CurrentPlayerStats.CurrentHealth, CurrentPlayerStats.MaxHealth);
 
         //Updates
         AddInUpdatesTheNewAttacks();
@@ -103,7 +103,7 @@ public class GameManager : MonoBehaviour
         if (CurrentEnemyStats != null)
         {
             CurrentEnemyStats.SetupLevel(CurrentGameData.CurrentEnemyLevel);
-            uiManager.UpdateCharacterHealth(1.0f * CurrentEnemyStats.CurrentHealth / CurrentEnemyStats.MaxHealth, false);
+            uiManager.UpdateCharacterHealth(1.0f * CurrentEnemyStats.CurrentHealth / CurrentEnemyStats.MaxHealth, false, CurrentEnemyStats.CurrentHealth, CurrentEnemyStats.MaxHealth);
             uiManager.UpdateEnemyLevel(CurrentEnemyStats.Level);
         }
         uiManager.ChangeCharacterStats(CurrentEnemyStats.MapToStats(), false);
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
 
         if (attackSelected.TurnsToActivate != 0)
         {
-            attackSelected.Initialize();
+            attackSelected.Reset();
         }
     }
 
@@ -158,7 +158,7 @@ public class GameManager : MonoBehaviour
     {
         character.PlayDamageAnimation();
         var hitTarget = character.DamageCharacter(attackDamage);
-        uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer);
+        uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer, character.CurrentHealth, character.MaxHealth);
 
         if (!hitTarget)
         {
@@ -311,6 +311,9 @@ public class GameManager : MonoBehaviour
                     removeUpdate = true;
                 }
                 break;
+            case UpdateType.FullHealth:
+                CurrentPlayerStats.CurrentHealth = CurrentPlayerStats.MaxHealth;
+                break;
             default:
                 break;
         }
@@ -320,6 +323,7 @@ public class GameManager : MonoBehaviour
             Updates = Updates.Where(u => !u.Equals(update)).ToArray();
         }
 
+        uiManager.UpdateCharacterHealth(CurrentPlayerStats.CurrentHealth * 1.0f / CurrentPlayerStats.MaxHealth, true, CurrentPlayerStats.CurrentHealth, CurrentPlayerStats.MaxHealth);
         uiManager.ChangeCharacterStats(CurrentPlayerStats.MapToStats(), true);
         uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
     }

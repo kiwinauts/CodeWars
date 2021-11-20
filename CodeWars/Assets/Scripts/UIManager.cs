@@ -11,7 +11,11 @@ public class UIManager : MonoBehaviour
     [Header("Health")]
     public Slider PlayerHealth;
 
+    public Text PlayerHealthText;
+
     public Slider EnemyHealth;
+
+    public Text EnemyHealthText;
 
     [Header("Updates")]
     public Button[] UpdateUI;
@@ -24,6 +28,8 @@ public class UIManager : MonoBehaviour
     public List<Button> CurrentUIAttacks;
 
     public Text AttackMessage;
+
+    public Vector2 AttackUIOffset;
 
     public float AttackMessageSeconds;
 
@@ -105,14 +111,18 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void UpdateCharacterHealth(float health, bool isPlayer)
+    public void UpdateCharacterHealth(float health, bool isPlayer, int currentHealth, int maxHealth)
     {
+        currentHealth = currentHealth <= 0 ? 0 : currentHealth;
+
         if (isPlayer)
         {
             PlayerHealth.value = health;
+            PlayerHealthText.text = $"{currentHealth}/{maxHealth}";
             return;
         }
 
+        EnemyHealthText.text = $"{currentHealth}/{maxHealth}";
         EnemyHealth.value = health;
     }
 
@@ -132,7 +142,7 @@ public class UIManager : MonoBehaviour
             instantiated.transform.SetParent(AttackCanvasParent.transform);
             var rectTransform = instantiated.GetComponent<RectTransform>();
 
-            rectTransform.anchoredPosition = new Vector2(CalculateXLocation(currentAttacks.Count(), currentAttackIndex), 100);
+            rectTransform.anchoredPosition = new Vector2(CalculateXLocation(currentAttacks.Count(), currentAttackIndex), AttackUIOffset.y);
 
             var button = AddAttackListener(instantiated, currentAttack);
 
@@ -148,15 +158,15 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    private static float CalculateXLocation(int currentAttacksCount, int currentAttackIndex)
+    private float CalculateXLocation(int currentAttacksCount, int currentAttackIndex)
     {
         if (currentAttacksCount == 1)
         {
             return 0;
         }
 
-        var initialX = (-1) * 62.5f * 2 * (currentAttacksCount - 1);
-        return System.Convert.ToSingle(initialX + currentAttackIndex * 250f);
+        var initialX = (-1) * AttackUIOffset.x * (currentAttacksCount - 1);
+        return System.Convert.ToSingle(initialX + currentAttackIndex * AttackUIOffset.x * 2);
     }
 
     private Button AddAttackListener(GameObject instantiated, Attack attack)
