@@ -59,7 +59,9 @@ public class UIManager : MonoBehaviour
         {
             Destroy(this);
         }
+
         Instance = this;
+        HideAllUpdates();
     }
     
     public void MissMessage()
