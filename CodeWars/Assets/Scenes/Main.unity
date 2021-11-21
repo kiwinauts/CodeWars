@@ -1322,7 +1322,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2579258131446119523, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: DamageBonus
-      value: 20
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_RootOrder
@@ -1931,6 +1931,7 @@ GameObject:
   - component: {fileID: 2025816939}
   - component: {fileID: 2025816938}
   - component: {fileID: 2025816937}
+  - component: {fileID: 2025816941}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2036,6 +2037,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
+--- !u!114 &2025816941
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2025816936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4cc3fba41fa164649b27c82ce3aba724, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShakeDirection: {x: 0.2, y: 0.2, z: 0.2}
+  ShakeDuration: 1
+  VibrateStrength: 2
+  VibrateRandomness: 80
+  EaseMode: 4
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0
