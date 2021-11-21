@@ -297,6 +297,7 @@ public class GameManager : MonoBehaviour
         {
             case UpdateType.NewAttackMove:
                 CurrentGameData.AddAttack(update.Attack);
+                CurrentGameData.CurrentAttacks = CurrentGameData.CurrentAttacks.OrderBy(x => x.Damage).ToList();
                 removeUpdate = true;
                 break;
             case UpdateType.BonusAttackDamage:

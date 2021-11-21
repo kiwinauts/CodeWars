@@ -70,8 +70,8 @@ MonoBehaviour:
   DamageBonus: 0
   Evasion: 0.1
   Accuracy: 0.5
-  MaxHealth: 100
-  CurrentHealth: 100
+  MaxHealth: 30
+  CurrentHealth: 30
   Animator: {fileID: 0}
   IsPlayer: 0
   MaxEvasion: 0.6
@@ -80,7 +80,6 @@ MonoBehaviour:
   Attack:
     Name: 
     Id: 0
-    Description: 
     Damage: 5
     CriticalChance: 0
     TurnsToActivate: 0
@@ -99,11 +98,11 @@ MonoBehaviour:
     Cap: 0.9
   AttackDamageUpgradePerLevel:
     Minimum: 5
-    Maximum: 10
+    Maximum: 20
     Cap: 0
   HealthUpgradePerLevel:
     Minimum: 10
-    Maximum: 30
+    Maximum: 40
     Cap: 0
 --- !u!1 &6172612475302076175
 GameObject:

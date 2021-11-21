@@ -1184,25 +1184,25 @@ MonoBehaviour:
     - Name: Basic Attack
       Id: 0
       Damage: 10
-      CriticalChance: 0.2
+      CriticalChance: 0.1
       TurnsToActivate: 0
       RemainingTurns: 0
     - Name: Heavy Attack
       Id: 0
       Damage: 20
-      CriticalChance: 0.4
+      CriticalChance: 0.2
       TurnsToActivate: 1
       RemainingTurns: 0
     - Name: Ultimate Attack
       Id: 0
       Damage: 40
-      CriticalChance: 0.5
+      CriticalChance: 0.3
       TurnsToActivate: 3
       RemainingTurns: 0
     - Name: The Best Of All Attack
       Id: 0
       Damage: 60
-      CriticalChance: 0.6
+      CriticalChance: 0.4
       TurnsToActivate: 5
       RemainingTurns: 0
     CurrentAttacks: []
@@ -1468,10 +1468,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -2579258131446119523, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
-      propertyPath: DamageBonus
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_RootOrder
       value: 1

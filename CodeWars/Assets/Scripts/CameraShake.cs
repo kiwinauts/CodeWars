@@ -42,4 +42,9 @@ public class CameraShake : MonoBehaviour
             CreateShake();
         }
     }
+
+    private void OnDestroy()
+    {
+        _shake.Kill();
+    }
 }
