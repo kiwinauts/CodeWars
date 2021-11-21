@@ -103,4 +103,9 @@ public class UpdateTextController : MonoBehaviour, IPointerEnterHandler, IPointe
             _moveSequence.PlayBackwards();
         }
     }
+    private void OnDestroy()
+    {
+        _rectTransform = null;
+        _moveSequence.Kill();
+    }
 }
