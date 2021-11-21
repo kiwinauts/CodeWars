@@ -2053,7 +2053,7 @@ MonoBehaviour:
   ShakeDuration: 1
   VibrateStrength: 2
   VibrateRandomness: 80
-  EaseMode: 4
+  EaseMode: 26
 --- !u!1 &2138677391
 GameObject:
   m_ObjectHideFlags: 0

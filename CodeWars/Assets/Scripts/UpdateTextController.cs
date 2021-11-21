@@ -35,6 +35,8 @@ public class UpdateTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private void Reset()
     {
+        _moveSequence.Restart();
+        _moveSequence.Pause();
         UpdateValue.text = "";
         CriticalChance.text = "";
         RoundsToUnlock.text = "";
@@ -102,10 +104,5 @@ public class UpdateTextController : MonoBehaviour, IPointerEnterHandler, IPointe
         {
             _moveSequence.PlayBackwards();
         }
-    }
-    private void OnDestroy()
-    {
-        _rectTransform = null;
-        _moveSequence.Kill();
     }
 }
