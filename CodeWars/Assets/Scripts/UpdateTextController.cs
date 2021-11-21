@@ -1,10 +1,14 @@
+using DG.Tweening;
+using DG.Tweening.Core;
+using DG.Tweening.Plugins.Options;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UpdateTextController : MonoBehaviour
+public class UpdateTextController : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     public Text Name;
 
@@ -19,6 +23,15 @@ public class UpdateTextController : MonoBehaviour
     public GameObject[] NewAttackIcons;
 
     public Image UpdateValueIcon;
+
+    private RectTransform _rectTransform;
+    private TweenerCore<Vector3, Vector3, VectorOptions> _moveSequence;
+
+    private void Awake()
+    {
+        _rectTransform = GetComponent<RectTransform>();
+        _moveSequence = _rectTransform.DOScaleY(1.1f, 1).Pause().SetEase(Ease.InOutElastic).SetAutoKill(false);
+    }
 
     private void Reset()
     {
@@ -72,6 +85,22 @@ public class UpdateTextController : MonoBehaviour
         foreach (var icon in NewAttackIcons)
         {
             icon.SetActive(active);
+        }
+    }
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (_rectTransform != null)
+        {
+            _moveSequence.PlayForward();
+        }
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (_rectTransform != null)
+        {
+            _moveSequence.PlayBackwards();
         }
     }
 }

@@ -1322,7 +1322,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -2579258131446119523, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: DamageBonus
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_RootOrder

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class UIManager : MonoBehaviour
 {
@@ -62,6 +63,7 @@ public class UIManager : MonoBehaviour
 
         Instance = this;
         HideAllUpdates();
+        HideAttackMessage();
     }
     
     public void MissMessage()
@@ -119,9 +121,20 @@ public class UIManager : MonoBehaviour
 
         if (isPlayer)
         {
+            if (PlayerHealth.value != health && health != 1)
+            {
+                PlayerHealth.transform.DOShakeScale(1f, 0.3f);
+            }
+
             PlayerHealth.value = health;
             PlayerHealthText.text = $"{currentHealth}/{maxHealth}";
+
             return;
+        }
+
+        if (EnemyHealth.value != health && health != 1)
+        {
+            EnemyHealth.transform.DOShakeScale(1f, 0.3f);
         }
 
         EnemyHealthText.text = $"{currentHealth}/{maxHealth}";

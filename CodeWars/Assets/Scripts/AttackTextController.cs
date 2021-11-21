@@ -15,17 +15,21 @@ public class AttackTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public Image RemainingTurnsImage;
 
+    private RectTransform _rectTransform;
     private Tweener _moveSequence;
 
     private void Awake()
     {
-        var rectTransform = GetComponent<RectTransform>();
-        _moveSequence = rectTransform.DOMoveY(150f, 1).SetRelative().Pause().SetEase(Ease.InOutElastic).SetAutoKill(false);
+        _rectTransform = GetComponent<RectTransform>();
+        _moveSequence = _rectTransform.DOMoveY(150f, 1).SetRelative().Pause().SetEase(Ease.InOutElastic).SetAutoKill(false);
     }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        _moveSequence.PlayForward();
+        if (_rectTransform != null)
+        {
+            _moveSequence.PlayForward();
+        }
     }
 
     public void UpdateAttack(AttackUI attack)
@@ -39,6 +43,9 @@ public class AttackTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        _moveSequence.PlayBackwards();
+        if (_rectTransform != null)
+        {
+            _moveSequence.PlayBackwards();
+        }
     }
 }
