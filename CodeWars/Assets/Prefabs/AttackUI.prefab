@@ -475,7 +475,6 @@ GameObject:
   - component: {fileID: 5248616952638298534}
   - component: {fileID: 5248616952638298535}
   - component: {fileID: 4803399088263336004}
-  - component: {fileID: 4143072212205871178}
   m_Layer: 5
   m_Name: AttackUI
   m_TagString: Untagged
@@ -620,25 +619,6 @@ MonoBehaviour:
   Damage: {fileID: 6490464815347206502}
   RemainingTurns: {fileID: 877430430531326042}
   RemainingTurnsImage: {fileID: 9020662700244657836}
---- !u!95 &4143072212205871178
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5248616952638298529}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: fbd75e428d508e148870f4a463e19280, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 2
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5480963721683325371
 GameObject:
   m_ObjectHideFlags: 0

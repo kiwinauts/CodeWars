@@ -59,6 +59,9 @@ public class UpdateTextController : MonoBehaviour
                 UpdateValueIcon.gameObject.SetActive(true);
                 UpdateValue.text = $"+{Convert.ToInt32(vm.UpdateValue)}";
                 break;
+            case UpdateType.FullHealth:
+                UpdateValueIcon.gameObject.SetActive(true);
+                break;
             default:
                 break;
         }
