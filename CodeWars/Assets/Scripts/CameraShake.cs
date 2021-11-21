@@ -37,7 +37,6 @@ public class CameraShake : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(_shake.IsPlaying());
         if (!_shake.IsPlaying())
         {
             CreateShake();
