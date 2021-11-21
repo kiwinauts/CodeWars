@@ -22,6 +22,8 @@ public class GameManager : MonoBehaviour
 
     private UIManager uiManager;
 
+    private AudioManager audioManager;
+
     private bool clickedEscape;
 
     // Start is called before the first frame update
@@ -34,6 +36,7 @@ public class GameManager : MonoBehaviour
 
         Instance = this;
         uiManager = GetComponent<UIManager>();
+        audioManager = GetComponent<AudioManager>();
 
         //First Round
         CurrentGameData.Round = 1;
@@ -117,6 +120,7 @@ public class GameManager : MonoBehaviour
     public void PlayerAttack(Attack attackSelected)
     {
         uiManager.DisableCurrentAttacks();
+        audioManager.ChoseAttack();
 
         if (attackSelected == null)
         {
@@ -146,6 +150,7 @@ public class GameManager : MonoBehaviour
         else
         {
             uiManager.MissMessage();
+            audioManager.MissAttack();
         }
 
         if (!endRound)
@@ -163,10 +168,16 @@ public class GameManager : MonoBehaviour
         if (!hitTarget)
         {
             uiManager.EvadeMessage();
+            audioManager.AvoidAttack();
         }
         else if (critical)
         {
             uiManager.CriticalHitMessage();
+            audioManager.CriticalHit();
+        }
+        else
+        {
+            audioManager.NormalAttack();
         }
 
         if (!character.IsDead)
@@ -222,6 +233,7 @@ public class GameManager : MonoBehaviour
             EndGame();
             return;
         }
+        audioManager.Death();
 
         CurrentGameData.Round++;
         uiManager.UpdateRound(CurrentGameData.Round);
@@ -278,6 +290,7 @@ public class GameManager : MonoBehaviour
     public void ChosenUpdate(UpdateVm update)
     {
         uiManager.HideAllUpdates();
+        audioManager.ChoseUpdate();
 
         var removeUpdate = false;
         switch (update.updateType)
