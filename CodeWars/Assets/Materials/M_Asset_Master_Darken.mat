@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Asset_Master
+  m_Name: M_Asset_Master_Darken
   m_Shader: {fileID: -6465566751694194690, guid: 96ca95fc007adfb4ebefd8d4af871569, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
@@ -80,7 +80,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_280a886cac96420f8622e92ae58102c5: 0.25
+    - Vector1_280a886cac96420f8622e92ae58102c5: 0.05
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
