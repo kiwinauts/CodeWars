@@ -2674,7 +2674,7 @@ MonoBehaviour:
     Round: 0
     CurrentTurn: 0
     IncreaseTurnDelay: 1
-    RespawnEnemyDelay: 1
+    NewRoundDelay: 1
     AvailableAttacks:
     - Name: Basic Attack
       Id: 0
@@ -2704,6 +2704,7 @@ MonoBehaviour:
     IncreaseLevelOfEnemyAfterRoundMin: 2
     IncreaseLevelOfEnemyAfterRoundMax: 5
     CurrentEnemyLevelIncrease: 0
+    Enemy: {fileID: 2188495528723053062, guid: 281024d5bd4e14446b48fc8c494f511e, type: 3}
     CurrentEnemyLevel: 1
     SpawnPosition: {x: -0.4, y: 1, z: 1.8}
     SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -2782,8 +2783,6 @@ MonoBehaviour:
       TurnsToActivate: 0
       RemainingTurns: 0
     Image: {fileID: 21300000, guid: a49bc3f2ca852f048bff6098354bdde0, type: 3}
-  Enemies:
-  - {fileID: 2188495528723053062, guid: 281024d5bd4e14446b48fc8c494f511e, type: 3}
 --- !u!4 &1265528534
 Transform:
   m_ObjectHideFlags: 0
