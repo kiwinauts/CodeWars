@@ -9,7 +9,11 @@ public class GameData
     public int Round = 1;
 
     public Turn CurrentTurn = Turn.Player;
-    
+
+    public float IncreaseTurnDelay = 2f;
+
+    public float NewRoundDelay = 1f;
+
     [Header("Character")]
     public List<Attack> AvailableAttacks;
 

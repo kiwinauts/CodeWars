@@ -24,12 +24,13 @@ public class CharacterStats : MonoBehaviour
 
     public float MaxCritical = 0.6f;
 
+    public int AttackAnimationCount = 1;
+
     private Attack currentAttack;
 
     public void Start()
     {
         CurrentHealth = MaxHealth;
-        Animator = GetComponent<Animator>();
     }
 
     public bool DamageCharacter(int damage)
@@ -78,15 +79,16 @@ public class CharacterStats : MonoBehaviour
     public void PlayAttackAnimation(Attack attack)
     {
         const string AttackAnimationName = "Attack";
-        Animator?.SetTrigger(AttackAnimationName);
+        var attackAnimation = Random.Range(1, AttackAnimationCount + 1);
+        Animator?.SetInteger(AttackAnimationName, attackAnimation);
         currentAttack = attack;
-        Invoke("CharacterAttackedAnimationEvent", 1f);
     }
 
     public void CharacterAttackedAnimationEvent()
     {
-        Debug.Log("Attack animation finished");
+        const string AttackAnimationName = "Attack";
         GameManager.Instance.CharacterAttacked(this, currentAttack);
+        Animator?.SetInteger(AttackAnimationName, 0);
     }
 
     public void PlayDamageAnimation()
@@ -99,12 +101,10 @@ public class CharacterStats : MonoBehaviour
     {
         const string DeathAnimationName = "Death";
         Animator?.SetTrigger(DeathAnimationName);
-        Invoke("DestroyCharacterAnimationEvent", 1f);
     }
 
     public void DestroyCharacterAnimationEvent()
     {
-        Debug.Log("Death animation finished");
         Destroy(gameObject);
         GameManager.Instance.IncreaseRound(IsPlayer);
     }

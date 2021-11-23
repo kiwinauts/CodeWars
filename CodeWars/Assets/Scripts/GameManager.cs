@@ -155,22 +155,23 @@ public class GameManager : MonoBehaviour
 
         if (!endRound)
         {
-            IncreaseTurn();
+            Invoke("IncreaseTurn", CurrentGameData.IncreaseTurnDelay);
         }
     }
 
     private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage, bool critical)
     {
-        character.PlayDamageAnimation();
         var hitTarget = character.DamageCharacter(attackDamage);
-        uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer, character.CurrentHealth, character.MaxHealth);
 
         if (!hitTarget)
         {
             uiManager.EvadeMessage();
             audioManager.AvoidAttack();
+            return false;
         }
-        else if (critical)
+        
+        character.PlayDamageAnimation();
+        if (critical)
         {
             uiManager.CriticalHitMessage();
             audioManager.CriticalHit();
@@ -179,6 +180,8 @@ public class GameManager : MonoBehaviour
         {
             audioManager.NormalAttack();
         }
+
+        uiManager.UpdateCharacterHealth(character.CurrentHealth * 1.0f / character.MaxHealth, character.IsPlayer, character.CurrentHealth, character.MaxHealth);
 
         if (!character.IsDead)
         {
@@ -233,8 +236,8 @@ public class GameManager : MonoBehaviour
             EndGame();
             return;
         }
+        
         audioManager.Death();
-
         CurrentGameData.Round++;
         uiManager.UpdateRound(CurrentGameData.Round);
 
@@ -244,8 +247,6 @@ public class GameManager : MonoBehaviour
             CurrentGameData.CurrentEnemyLevel++;
             CurrentGameData.CurrentEnemyLevelIncrease = GetRandomLevelIncrease();
         }
-
-        RespawnEnemy();
 
         ChooseUpgradeAndSendToUIManager();
         CurrentGameData.CurrentTurn = Turn.Player;
@@ -345,6 +346,12 @@ public class GameManager : MonoBehaviour
 
         uiManager.UpdateCharacterHealth(CurrentPlayerStats.CurrentHealth * 1.0f / CurrentPlayerStats.MaxHealth, true, CurrentPlayerStats.CurrentHealth, CurrentPlayerStats.MaxHealth);
         uiManager.ChangeCharacterStats(CurrentPlayerStats.MapToStats(), true);
+        Invoke("NewRound", CurrentGameData.NewRoundDelay);
+    }
+
+    private void NewRound()
+    {
         uiManager.CreateAttackButtons(CurrentGameData.CurrentAttacks);
+        RespawnEnemy();
     }
 }
