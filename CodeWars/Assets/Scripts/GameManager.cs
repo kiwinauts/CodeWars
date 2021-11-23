@@ -18,8 +18,6 @@ public class GameManager : MonoBehaviour
 
     public UpdateVm[] Updates;
 
-    public GameObject[] Enemies;
-
     private UIManager uiManager;
 
     private AudioManager audioManager;
@@ -100,8 +98,7 @@ public class GameManager : MonoBehaviour
 
     private void RespawnEnemy()
     {
-        var enemyToSpawn = Enemies[Random.Range(0, Enemies.Length)];
-        var instantiatedEnemy = Instantiate(enemyToSpawn, CurrentGameData.SpawnPosition, CurrentGameData.SpawnRotation);
+        var instantiatedEnemy = Instantiate(CurrentGameData.Enemy, CurrentGameData.SpawnPosition, CurrentGameData.SpawnRotation);
         CurrentEnemyStats = instantiatedEnemy.GetComponent<Enemy>();
         if (CurrentEnemyStats != null)
         {

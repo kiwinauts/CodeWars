@@ -26,6 +26,8 @@ public class GameData
 
     public int CurrentEnemyLevelIncrease = 0;
 
+    public GameObject Enemy;
+
     [Range(1,1)]
     public int CurrentEnemyLevel = 1;
 
