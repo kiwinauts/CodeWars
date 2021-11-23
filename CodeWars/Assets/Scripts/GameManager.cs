@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
         var endRound = false;
         if (successAttack)
         {
-            endRound = PerformEnemyDamageAndCheckForEndRound(enemy, attackDamage, critical);
+            endRound = PerformEnemyDamageAndCheckForEndRound(enemy, attackDamage, critical, attack.AttackParticles);
         }
         else
         {
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage, bool critical)
+    private bool PerformEnemyDamageAndCheckForEndRound(CharacterStats character, int attackDamage, bool critical, ParticleSystem attackParticles)
     {
         var hitTarget = character.DamageCharacter(attackDamage);
 
@@ -166,8 +166,10 @@ public class GameManager : MonoBehaviour
             audioManager.AvoidAttack();
             return false;
         }
-        
+
         character.PlayDamageAnimation();
+        SpawnParticleSystem(attackParticles);
+
         if (critical)
         {
             uiManager.CriticalHitMessage();
@@ -187,6 +189,16 @@ public class GameManager : MonoBehaviour
 
         character.DeathAndIncreaseRound();
         return true;
+    }
+
+    private void SpawnParticleSystem(ParticleSystem attackParticles)
+    {
+        if (attackParticles == null)
+        {
+            return;
+        }
+
+        Instantiate(attackParticles, CurrentGameData.SpawnPosition, Quaternion.identity);
     }
 
     private void EndGame()
@@ -233,7 +245,7 @@ public class GameManager : MonoBehaviour
             EndGame();
             return;
         }
-        
+
         audioManager.Death();
         CurrentGameData.Round++;
         uiManager.UpdateRound(CurrentGameData.Round);
@@ -308,7 +320,7 @@ public class GameManager : MonoBehaviour
                 break;
             case UpdateType.BonusCriticalChance:
                 CurrentPlayerStats.CriticalChance = Mathf.Min(CurrentPlayerStats.MaxCritical, CurrentPlayerStats.CriticalChance + update.UpdateValue);
-                
+
                 if (CurrentPlayerStats.CriticalChance == CurrentPlayerStats.MaxCritical)
                 {
                     removeUpdate = true;

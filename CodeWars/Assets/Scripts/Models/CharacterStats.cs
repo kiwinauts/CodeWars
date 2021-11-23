@@ -78,17 +78,17 @@ public class CharacterStats : MonoBehaviour
 
     public void PlayAttackAnimation(Attack attack)
     {
+        currentAttack = attack;
         const string AttackAnimationName = "Attack";
         var attackAnimation = Random.Range(1, AttackAnimationCount + 1);
         Animator?.SetInteger(AttackAnimationName, attackAnimation);
-        currentAttack = attack;
     }
 
     public void CharacterAttackedAnimationEvent()
     {
         const string AttackAnimationName = "Attack";
-        GameManager.Instance.CharacterAttacked(this, currentAttack);
         Animator?.SetInteger(AttackAnimationName, 0);
+        GameManager.Instance.CharacterAttacked(this, currentAttack);
     }
 
     public void PlayDamageAnimation()

@@ -17,6 +17,8 @@ public class Attack
 
     public int RemainingTurns = 0;
 
+    public ParticleSystem AttackParticles;
+
     public bool isActive
     {
         get { return RemainingTurns == 0; }

@@ -2775,24 +2775,28 @@ MonoBehaviour:
       CriticalChance: 0.1
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
     - Name: Heavy Attack
       Id: 0
       Damage: 20
       CriticalChance: 0.2
       TurnsToActivate: 1
       RemainingTurns: 0
+      AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
     - Name: Ultimate Attack
       Id: 0
       Damage: 40
       CriticalChance: 0.3
       TurnsToActivate: 3
       RemainingTurns: 0
+      AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
     - Name: The Best Of All Attack
       Id: 0
       Damage: 60
       CriticalChance: 0.4
       TurnsToActivate: 5
       RemainingTurns: 0
+      AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
     CurrentAttacks: []
     IncreaseLevelOfEnemyAfterRoundMin: 2
     IncreaseLevelOfEnemyAfterRoundMax: 5
@@ -2815,6 +2819,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: 1186ba83be552e241b9437c1f7b501b4, type: 3}
   - updateType: 2
     Name: Critical Chance
@@ -2827,6 +2832,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: 875c3923318278f468f427539aed956b, type: 3}
   - updateType: 3
     Name: Evasion
@@ -2839,6 +2845,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: 99bd48468e3f19e459899c12c670b2ac, type: 3}
   - updateType: 4
     Name: Health UP
@@ -2851,6 +2858,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: a49bc3f2ca852f048bff6098354bdde0, type: 3}
   - updateType: 5
     Name: Accuracy
@@ -2863,6 +2871,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: ae12e0030f3e1d64ca13c35cdafcaaf7, type: 3}
   - updateType: 6
     Name: Full Health
@@ -2875,6 +2884,7 @@ MonoBehaviour:
       CriticalChance: 0
       TurnsToActivate: 0
       RemainingTurns: 0
+      AttackParticles: {fileID: 0}
     Image: {fileID: 21300000, guid: a49bc3f2ca852f048bff6098354bdde0, type: 3}
 --- !u!4 &1265528534
 Transform:
