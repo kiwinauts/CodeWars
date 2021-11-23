@@ -1315,7 +1315,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 85003557668407400, guid: 644b1bb1e9cf2684c8a14dbfe226a6a6, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 85003557668407400, guid: 644b1bb1e9cf2684c8a14dbfe226a6a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2586,7 +2586,7 @@ MonoBehaviour:
     IncreaseLevelOfEnemyAfterRoundMax: 5
     CurrentEnemyLevelIncrease: 0
     CurrentEnemyLevel: 1
-    SpawnPosition: {x: 5, y: 0, z: 4}
+    SpawnPosition: {x: 2.5, y: 0.5, z: 1.5}
     SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
   CurrentPlayerStats: {fileID: 1368938207}
   CurrentEnemyStats: {fileID: 0}
@@ -2907,15 +2907,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 416636263817118711, guid: 70668eaff6ac852409f2554b2ff66d3b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -4177,7 +4177,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2012361973587447411, guid: 94e6b2ae68d298840938b58ede37ab59, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2012361973587447411, guid: 94e6b2ae68d298840938b58ede37ab59, type: 3}
       propertyPath: m_LocalPosition.x
