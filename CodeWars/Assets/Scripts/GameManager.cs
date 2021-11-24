@@ -203,7 +203,6 @@ public class GameManager : MonoBehaviour
 
     private void EndGame()
     {
-        Debug.Log("End Game");
         SceneManager.LoadScene(0);
     }
 

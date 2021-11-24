@@ -17,6 +17,7 @@ public class AttackTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     private RectTransform _rectTransform;
     private Tweener _moveSequence;
+    private bool mouseOver;
 
     private void Awake()
     {
@@ -26,9 +27,18 @@ public class AttackTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (_rectTransform != null)
+        mouseOver = true;
+        if (_rectTransform != null && !_moveSequence.IsPlaying())
         {
             _moveSequence.PlayForward();
+        }
+    }
+
+    private void Update()
+    {
+        if (!mouseOver && _moveSequence != null && !_moveSequence.IsPlaying())
+        {
+            _moveSequence.PlayBackwards();
         }
     }
 
@@ -43,7 +53,8 @@ public class AttackTextController : MonoBehaviour, IPointerEnterHandler, IPointe
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        if (_rectTransform != null)
+        mouseOver = false;
+        if (_rectTransform != null && !_moveSequence.IsPlaying())
         {
             _moveSequence.PlayBackwards();
         }

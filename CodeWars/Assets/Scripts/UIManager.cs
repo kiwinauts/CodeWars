@@ -153,8 +153,7 @@ public class UIManager : MonoBehaviour
 
         foreach (var currentAttack in currentAttacks)
         {
-            var instantiated = Instantiate(AttackButton);
-            instantiated.transform.SetParent(AttackCanvasParent.transform);
+            var instantiated = Instantiate(AttackButton, AttackCanvasParent.transform);
             var rectTransform = instantiated.GetComponent<RectTransform>();
 
             rectTransform.anchoredPosition = new Vector2(CalculateXLocation(currentAttacks.Count(), currentAttackIndex), AttackUIOffset.y);
