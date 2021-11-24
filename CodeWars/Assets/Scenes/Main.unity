@@ -2803,8 +2803,8 @@ MonoBehaviour:
     CurrentEnemyLevelIncrease: 0
     Enemy: {fileID: 2188495528723053062, guid: 281024d5bd4e14446b48fc8c494f511e, type: 3}
     CurrentEnemyLevel: 1
-    SpawnPosition: {x: -0.4, y: 1, z: 1.8}
-    SpawnRotation: {x: 0, y: 0, z: 0, w: 0}
+    SpawnPosition: {x: -0.3, y: 0, z: 1.5}
+    SpawnRotation: {x: 0, y: 0.70710677, z: 0, w: 0.70710677}
   CurrentPlayerStats: {fileID: 1368938207}
   CurrentEnemyStats: {fileID: 0}
   Updates:
