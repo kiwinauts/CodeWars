@@ -237,15 +237,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Player
-  CriticalChance: 0.1
+  CriticalChance: 0.05
   DamageBonus: 20
-  Evasion: 0.2
-  Accuracy: 0.7
+  Evasion: 0.1
+  Accuracy: 0.75
   MaxHealth: 100
   CurrentHealth: 100
   Animator: {fileID: 8565796840490408818}
   IsPlayer: 1
-  MaxEvasion: 0.6
+  MaxEvasion: 0.5
   MaxCritical: 0.5
   AttackAnimationCount: 2
 --- !u!1001 &40358529277743111
