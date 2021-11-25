@@ -12,7 +12,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     private void Start()
     {
-        _scaleAnimation = transform.DOScale(1.1f, 1f).Pause().SetAutoKill(false).SetEase(Ease.InOutElastic);
+        _scaleAnimation = transform.DOScale(1.5f, 0.5f).Pause().SetAutoKill(false).SetEase(Ease.InOutElastic);
     }
 
 
