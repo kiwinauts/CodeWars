@@ -45,10 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Enemy
-  CriticalChance: 0.1
+  CriticalChance: 0.025
   DamageBonus: 0
-  Evasion: 0.1
-  Accuracy: 0.5
+  Evasion: 0.05
+  Accuracy: 0.55
   MaxHealth: 30
   CurrentHealth: 30
   Animator: {fileID: 1134994397179386769}
@@ -64,26 +64,26 @@ MonoBehaviour:
     CriticalChance: 0
     TurnsToActivate: 0
     RemainingTurns: 0
-    AttackParticles: {fileID: 0}
+    AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
   CriticalChanceUpgradePerLevel:
-    Minimum: 0.1
-    Maximum: 0.2
-    Cap: 0.5
+    Minimum: 0.04
+    Maximum: 0.08
+    Cap: 0.4
   EvasionUpgradePerLevel:
     Minimum: 0.05
     Maximum: 0.1
     Cap: 0.5
   AccuracyUpgradePerLevel:
-    Minimum: 0.1
-    Maximum: 0.2
-    Cap: 0.9
+    Minimum: 0.05
+    Maximum: 0.1
+    Cap: 0.85
   AttackDamageUpgradePerLevel:
-    Minimum: 5
-    Maximum: 20
+    Minimum: 2
+    Maximum: 8
     Cap: 0
   HealthUpgradePerLevel:
-    Minimum: 10
-    Maximum: 40
+    Minimum: 5
+    Maximum: 15
     Cap: 0
   MaterialColor:
   - 0

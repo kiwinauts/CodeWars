@@ -3007,16 +3007,17 @@ MonoBehaviour:
   AttackUIOffset: {x: 125, y: -140}
   AttackMessageSeconds: 1
   MissMessages:
-  - You missed again :(
-  - You missed again :(
-  - You missed again :(
+  - Attack missed, better luck next time.
+  - Get your eyes checked. Your attack missed.
+  - You need to focus. Attack missed!
   CriticalMessages:
-  - Wow that was a critical
-  - Wow that was a critical
-  - Wow that was a critical
+  - Critical hit!
+  - WOW! That was a critical!
+  - Ouch, this must have hurt! Critical hit.
   EvadeMessages:
-  - Your attack was evaded
-  - Your attack was evaded
+  - Great agility! Attack was evaded!
+  - Such ninja moves. Attack was evaded!
+  - That was close, but not close enough. Attack evaded!
   EnemyLevel: {fileID: 423930854}
   PlayerStats: {fileID: 1815686287}
   EnemyStats: {fileID: 1907916055}
@@ -3040,7 +3041,7 @@ MonoBehaviour:
   CriticalClip: {fileID: 8300000, guid: 8aed7b2d12ea79846bf51c641babd62d, type: 3}
   NormalAttackClip: {fileID: 8300000, guid: 8232914c52910984eae32223ca7108b1, type: 3}
   AvoidAttackClip: {fileID: 8300000, guid: b27bf1170e0d4834493d7ff193c97c95, type: 3}
-  DeathClip: {fileID: 8300000, guid: 43c12331204ed3a4ebe8286cfe958238, type: 3}
+  DeathClip: {fileID: 8300000, guid: 6a1ff41fe614d5649a32ab7c7d8355a4, type: 3}
 --- !u!1 &1273242304
 GameObject:
   m_ObjectHideFlags: 0

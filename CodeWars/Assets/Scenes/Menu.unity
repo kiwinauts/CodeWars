@@ -355,7 +355,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 5.41e-43, y: 2.2237797, z: 5.41e-43, w: 70.55072}
+  m_BoundingSphereOverride: {x: 2.7821e-41, y: 0, z: 0, w: 0.000000019233198}
   m_UseBoundingSphereOverride: 0
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
@@ -465,7 +465,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 45
+  m_RootOrder: 46
   m_LocalEulerAnglesHint: {x: -22.984, y: 45.717, z: 88.617}
 --- !u!1 &82779279
 GameObject:
@@ -1704,7 +1704,7 @@ MonoBehaviour:
   priority: 0
   blendDistance: 0
   weight: 1
-  sharedProfile: {fileID: 11400000, guid: 573c85a96bdb3de42a38b1b93f79ac90, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 667e2487c787333488e4b65e20210b3f, type: 2}
 --- !u!4 &511966878
 Transform:
   m_ObjectHideFlags: 0
@@ -3409,7 +3409,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 43
+  m_RootOrder: 45
   m_LocalEulerAnglesHint: {x: -22.984, y: 45.717, z: 88.617}
 --- !u!1 &1232595430
 GameObject:
@@ -3709,7 +3709,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 46
+  m_RootOrder: 44
   m_LocalEulerAnglesHint: {x: -48.759, y: 23.037, z: 103.186}
 --- !u!1001 &1303374935
 PrefabInstance:
@@ -3979,7 +3979,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 44
+  m_RootOrder: 43
   m_LocalEulerAnglesHint: {x: -22.988, y: 38.818, z: 91.314}
 --- !u!1001 &1484942179
 PrefabInstance:
