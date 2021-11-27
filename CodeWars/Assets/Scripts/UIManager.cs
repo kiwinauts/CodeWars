@@ -30,6 +30,8 @@ public class UIManager : MonoBehaviour
 
     public Text AttackMessage;
 
+    public Text AttackMessageDrop;
+
     public Vector2 AttackUIOffset;
 
     public float AttackMessageSeconds;
@@ -84,12 +86,14 @@ public class UIManager : MonoBehaviour
     private void ShowAttackMessage(string message)
     {
         AttackMessage.text = message;
+        AttackMessageDrop.text = message;
         Invoke("HideAttackMessage", AttackMessageSeconds);
     }
 
     private void HideAttackMessage()
     {
         AttackMessage.text = "";
+        AttackMessageDrop.text = "";
     }
 
     public void UpdateRound(int round)

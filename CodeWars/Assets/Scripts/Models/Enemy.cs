@@ -16,6 +16,15 @@ public class Enemy : CharacterStats
     
     public UpgradeMinMax<int> HealthUpgradePerLevel;
 
+    public float[] MaterialColor;
+
+    public void Awake()
+    {
+        const string hueVariable = "_HueShift";
+        var renderer = GetComponentInChildren<Renderer>();
+        renderer?.material?.SetFloat(hueVariable, MaterialColor[Random.Range(0, MaterialColor.Length)]);
+    }
+
     public void SetupLevel(int level)
     {
         Level = level;
