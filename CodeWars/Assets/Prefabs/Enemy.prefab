@@ -47,14 +47,14 @@ MonoBehaviour:
   Name: Enemy
   CriticalChance: 0.025
   DamageBonus: 0
-  Evasion: 0.05
+  Evasion: 0.02
   Accuracy: 0.55
   MaxHealth: 30
   CurrentHealth: 30
   Animator: {fileID: 1134994397179386769}
   IsPlayer: 0
-  MaxEvasion: 0.6
-  MaxCritical: 0.6
+  MaxEvasion: 0.5
+  MaxCritical: 0.5
   AttackAnimationCount: 1
   Level: 1
   Attack:
@@ -66,30 +66,30 @@ MonoBehaviour:
     RemainingTurns: 0
     AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
   CriticalChanceUpgradePerLevel:
-    Minimum: 0.04
-    Maximum: 0.08
+    Minimum: 0.025
+    Maximum: 0.05
     Cap: 0.4
   EvasionUpgradePerLevel:
-    Minimum: 0.05
-    Maximum: 0.1
-    Cap: 0.5
+    Minimum: 0.02
+    Maximum: 0.04
+    Cap: 0.35
   AccuracyUpgradePerLevel:
-    Minimum: 0.05
-    Maximum: 0.1
-    Cap: 0.85
+    Minimum: 0.025
+    Maximum: 0.05
+    Cap: 0.9
   AttackDamageUpgradePerLevel:
-    Minimum: 2
-    Maximum: 8
+    Minimum: 3
+    Maximum: 6
     Cap: 0
   HealthUpgradePerLevel:
-    Minimum: 5
-    Maximum: 15
+    Minimum: 6
+    Maximum: 12
     Cap: 0
   MaterialColor:
   - 0
   - 0.2
-  - 0.6
   - 0.4
+  - 0.6
   - 0.8
 --- !u!1001 &1195176294008534198
 PrefabInstance:

@@ -238,9 +238,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Player
   CriticalChance: 0.05
-  DamageBonus: 20
-  Evasion: 0.1
-  Accuracy: 0.75
+  DamageBonus: 10
+  Evasion: 0.08
+  Accuracy: 0.85
   MaxHealth: 100
   CurrentHealth: 100
   Animator: {fileID: 8565796840490408818}

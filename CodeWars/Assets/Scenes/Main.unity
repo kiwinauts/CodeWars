@@ -2889,8 +2889,8 @@ MonoBehaviour:
   Updates:
   - updateType: 1
     Name: Attack Damage
-    MinimumUpdate: 10
-    MaximumUpdate: 20
+    MinimumUpdate: 6
+    MaximumUpdate: 12
     Attack:
       Name: 
       Id: 0
@@ -2902,8 +2902,8 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: 1186ba83be552e241b9437c1f7b501b4, type: 3}
   - updateType: 2
     Name: Critical Chance
-    MinimumUpdate: 0.05
-    MaximumUpdate: 0.1
+    MinimumUpdate: 0.04
+    MaximumUpdate: 0.08
     Attack:
       Name: 
       Id: 0
@@ -2915,8 +2915,8 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: 875c3923318278f468f427539aed956b, type: 3}
   - updateType: 3
     Name: Evasion
-    MinimumUpdate: 0.05
-    MaximumUpdate: 0.1
+    MinimumUpdate: 0.04
+    MaximumUpdate: 0.08
     Attack:
       Name: 
       Id: 0
@@ -2928,8 +2928,8 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: 99bd48468e3f19e459899c12c670b2ac, type: 3}
   - updateType: 4
     Name: Health UP
-    MinimumUpdate: 10
-    MaximumUpdate: 25
+    MinimumUpdate: 12
+    MaximumUpdate: 24
     Attack:
       Name: 
       Id: 0
@@ -2941,8 +2941,8 @@ MonoBehaviour:
     Image: {fileID: 21300000, guid: a49bc3f2ca852f048bff6098354bdde0, type: 3}
   - updateType: 5
     Name: Accuracy
-    MinimumUpdate: 0.05
-    MaximumUpdate: 0.1
+    MinimumUpdate: 0.04
+    MaximumUpdate: 0.08
     Attack:
       Name: 
       Id: 0
