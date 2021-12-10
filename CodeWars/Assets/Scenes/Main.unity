@@ -2855,7 +2855,7 @@ MonoBehaviour:
       TurnsToActivate: 0
       RemainingTurns: 0
       AttackParticles: {fileID: 6820652466076367328, guid: d2a1bcf65a8d5064abf051be454e738c, type: 3}
-    - Name: '404: Not Found'
+    - Name: Sprint meeting
       Id: 0
       Damage: 25
       CriticalChance: 0.1
